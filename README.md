@@ -8,13 +8,24 @@ Our wedding website - Jimmy &amp; Ophélie
 - [ ] Deploy to Firebase via Travis
 - [ ] Init Cloud Functions / Hosting
 - [ ] Configure environments (Dev - Prod)
+- [ ] Custom domain mariage.robz.re to Firebase Hosting
 
-## Home
+## Pages
 
-## Invitations
+### Home
 
-## Games
+```
+http://mariage.robz.re/
+```
 
-## Photos
+### Invitations
 
-## Data
+```
+http://mariage.robz.re/invitation
+```
+
+### Photos
+
+```
+http://mariage.robz.re/photos
+```
