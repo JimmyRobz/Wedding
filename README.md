@@ -5,6 +5,7 @@ Our wedding website - Jimmy &amp; Ophélie
 
 - [x] Create Firebase project
 - [x] Create GitHub repo
+- [ ] Deploy to Firebase via Travis
 - [ ] Init Cloud Functions / Hosting
 - [ ] Configure environments (Dev - Prod)
 
@@ -15,3 +16,5 @@ Our wedding website - Jimmy &amp; Ophélie
 ## Games
 
 ## Photos
+
+## Data
