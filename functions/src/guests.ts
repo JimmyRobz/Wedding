@@ -1,12 +1,6 @@
-import algoliasearch = require('algoliasearch');
 import functions = require('firebase-functions');
-import pify = require('pify');
 
-// == Config ==
-
-const {appId, apiKey} = functions.config().algolia;
-const client = algoliasearch(appId, apiKey);
-const index = pify(client.initIndex('Guests'));
+import algolia = require('./algolia');
 
 // == API ==
 
@@ -20,17 +14,23 @@ export const onDelete = guest.onDelete(_onDelete);
 
 export async function _onCreate(event) {
     const guest = buildGuest(event);
-    await index.addObject(guest);
+    await algolia.usingGuests(async index => {
+        await index.addObject(guest);
+    });
 }
 
 export async function _onUpdate(event) {
     const guest = buildGuest(event);
-    await index.saveObject(guest);
+    await algolia.usingGuests(async index => {
+        await index.saveObject(guest);
+    });
 }
 
 export async function _onDelete(event) {
     const guest = buildGuest(event);
-    await index.deleteObject(guest);
+    await algolia.usingGuests(async index => {
+        await index.deleteObject(guest.objectID);
+    });
 }
 
 function buildGuest(event) {
