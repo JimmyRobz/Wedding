@@ -67,7 +67,7 @@ async function searchGuest(request, response) {
  */
 async function requestGuest(request, response) {
     const {firstName, lastName, phoneNumber} = request.body;
-    if (!firstName || !lastName) throw new Error('firstName and lastName properties are mandatory. phoneNumber is optional.');
+    if (!firstName || !lastName || !phoneNumber) throw new Error('First name, last name and phone number are mandatory.');
     const ref = await admin.firestore().collection('Requests').add({
         firstName,
         lastName,
@@ -97,9 +97,10 @@ async function getGroupById(request, response) {
  * @param response
  */
 async function requestGuestForGroup(request, response) {
+    // TODO Check that user is authenticated and that phone number is defined in group
     const id = request.params.id;
     const {firstName, lastName, phoneNumber} = request.body;
-    if (!firstName || !lastName) throw new Error('firstName and lastName properties are mandatory. phoneNumber is optional.');
+    if (!firstName || !lastName) throw new Error('First name and last name are mandatory. Phone number is optional.');
     const ref = await admin.firestore().collection('Requests').add({
         groupId: id,
         firstName, lastName, phoneNumber
@@ -109,10 +110,26 @@ async function requestGuestForGroup(request, response) {
     });
 }
 
-function respondToGroup(request, response) {
+/**
+ * Updates all responses for guests in a group.
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
+async function respondToGroup(request, response) {
+    // TODO Check that user is authenticated and that phone number is defined in group
     const id = request.params.id;
-    const guest = request.body;
-    // TODO
+    const responses = request.body;
+    const firestore = admin.firestore();
+    const guests = await firestore.collection('Groups').doc(id).collection('Guests');
+    const batch = firestore.batch();
+    _.each(responses, (guestResponse, guestId) => {
+        batch.update(guests.doc(guestId), {response: guestResponse})
+    });
+    await batch.commit();
+    response.send({
+        success: true
+    });
 }
 
 /**
