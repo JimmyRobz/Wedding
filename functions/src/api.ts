@@ -26,6 +26,11 @@ app.post('/group/:id/respond', wrapHandler(respondToGroup));
 
 // == Functions ==
 
+/**
+ * Root route pribts node version and app version.
+ * @param request
+ * @param response
+ */
 function root(request, response) {
     response.send({
         node: process.version,
