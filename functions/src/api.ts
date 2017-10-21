@@ -60,9 +60,22 @@ async function searchGuest(request, response) {
     response.send(guests);
 }
 
-function requestGuest(request, response) {
-    const guest = request.body;
-    // TODO
+/**
+ * Requests a new guest with no group.
+ * @param request
+ * @param response
+ */
+async function requestGuest(request, response) {
+    const {firstName, lastName, phoneNumber} = request.body;
+    if (!firstName || !lastName) throw new Error('firstName and lastName properties are mandatory. phoneNumber is optional.');
+    const ref = await admin.firestore().collection('Requests').add({
+        firstName,
+        lastName,
+        phoneNumber
+    });
+    response.status(200).send({
+        id: ref.id
+    });
 }
 
 /**
@@ -78,10 +91,22 @@ async function getGroupById(request, response) {
     response.send(group);
 }
 
-function requestGuestForGroup(request, response) {
+/**
+ * Requests a new guest to the group.
+ * @param request
+ * @param response
+ */
+async function requestGuestForGroup(request, response) {
     const id = request.params.id;
-    const guest = request.body;
-    // TODO
+    const {firstName, lastName, phoneNumber} = request.body;
+    if (!firstName || !lastName) throw new Error('firstName and lastName properties are mandatory. phoneNumber is optional.');
+    const ref = await admin.firestore().collection('Requests').add({
+        groupId: id,
+        firstName, lastName, phoneNumber
+    });
+    response.status(200).send({
+        id: ref.id
+    });
 }
 
 function respondToGroup(request, response) {
@@ -99,6 +124,11 @@ function wrapHandler(handler) {
     return async (request, response) => {
         try {
             await handler(request, response);
+            if (!response.headersSent) {
+                response.status(500).send({
+                    error: 'Request has not been handled correctly.'
+                });
+            }
         } catch (error) {
             response.status(500).send({
                 error: error.toString()
