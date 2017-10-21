@@ -12,6 +12,8 @@ export const app = express();
 
 app.use(bodyParser.json());
 
+app.get('/', wrapHandler(root));
+
 app.get('/guest/search/:query', wrapHandler(searchGuest));
 
 app.post('/guest/request', wrapHandler(requestGuest));
@@ -23,6 +25,13 @@ app.post('/group/:id/request', wrapHandler(requestGuestForGroup));
 app.post('/group/:id/respond', wrapHandler(respondToGroup));
 
 // == Functions ==
+
+function root(request, response) {
+    response.send({
+        node: process.version,
+        version: require('./../package.json').version
+    });
+}
 
 /**
  * Searches guest using Algoliasearch.
