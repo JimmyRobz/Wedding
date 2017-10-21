@@ -1,5 +1,5 @@
-import algoliasearch = require('algoliasearch');
-import functions = require('firebase-functions');
+import * as algoliasearch from 'algoliasearch';
+import * as functions from 'firebase-functions';
 
 // == Config ==
 
@@ -7,14 +7,10 @@ const {id, key} = functions.config().algolia;
 
 // == API ==
 
-export const client = () => algoliasearch(id, key);
-
-export const guests = (client) => client.initIndex('Guests');
-
-export const usingGuests = async (block) => {
-    const _client = client();
-    const index = guests(_client);
+export const usingGuests = async block => {
+    const client = algoliasearch(id, key);
+    const index = client.initIndex('Guests');
     const result = await block(index);
-    _client.destroy();
+    client.destroy();
     return result
 };

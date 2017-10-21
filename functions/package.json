@@ -9,6 +9,7 @@
     "express": "^4.16.1",
     "firebase-admin": "^5.4.1",
     "firebase-functions": "^0.7.0",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "p-map": "^1.2.0"
   }
 }

@@ -1,6 +1,6 @@
-import functions = require('firebase-functions');
+import * as functions from 'firebase-functions';
 
-import algolia = require('./algolia');
+import { usingGuests } from './algolia';
 
 // == API ==
 
@@ -14,21 +14,21 @@ export const onDelete = guest.onDelete(_onDelete);
 
 export async function _onCreate(event) {
     const guest = buildGuest(event);
-    await algolia.usingGuests(async index => {
+    await usingGuests(async index => {
         await index.addObject(guest);
     });
 }
 
 export async function _onUpdate(event) {
     const guest = buildGuest(event);
-    await algolia.usingGuests(async index => {
+    await usingGuests(async index => {
         await index.saveObject(guest);
     });
 }
 
 export async function _onDelete(event) {
     const guest = buildGuest(event);
-    await algolia.usingGuests(async index => {
+    await usingGuests(async index => {
         await index.deleteObject(guest.objectID);
     });
 }

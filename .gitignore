@@ -6,3 +6,9 @@
 
 # Functions compiled app
 functions/dist
+
+# Local functions config with environment variables
+functions/.runtimeconfig.json
+
+# Firebase logs
+functions/firebase-debug.log

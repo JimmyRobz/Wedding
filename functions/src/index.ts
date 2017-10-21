@@ -1,8 +1,8 @@
-import admin = require('firebase-admin');
-import functions = require('firebase-functions');
+import * as admin from 'firebase-admin';
+import * as functions from 'firebase-functions';
 
-import api = require('./api');
-import guests = require('./guests');
+import { app as api } from './api';
+import * as guests from './guests';
 
 // == Init ==
 
@@ -10,7 +10,7 @@ admin.initializeApp(functions.config().firebase);
 
 // == API ==
 
-exports.api = functions.https.onRequest(api.app);
+exports.api = functions.https.onRequest(api);
 
 // == Guest document ==
 
