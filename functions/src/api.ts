@@ -1,4 +1,5 @@
 import * as bodyParser from 'body-parser';
+import * as cors from 'cors';
 import * as express from 'express';
 import * as admin from 'firebase-admin';
 import * as _ from 'lodash';
@@ -11,6 +12,8 @@ import { usingGuests } from './algolia';
 export const app = express();
 
 app.use(bodyParser.json());
+
+app.use(cors());
 
 app.use(auth);
 
@@ -68,7 +71,13 @@ async function searchGuest(request, response) {
  * @param response
  */
 async function requestGuest(request, response) {
+    if (!request.user) throw new Error('Unauthorized. You must be authenticated to send responses for your group.');
+
+    const userPhoneNumber = request.user.phone_number;
     const {firstName, lastName, phoneNumber} = request.body;
+
+    if (userPhoneNumber !== phoneNumber) throw new Error('Unauthorized. User phone number does not match phone number parameter.');
+
     if (!firstName || !lastName || !phoneNumber) throw new Error('First name, last name and phone number are mandatory.');
     const ref = await admin.firestore().collection('Requests').add({
         firstName,
@@ -99,8 +108,12 @@ async function getGroupById(request, response) {
  * @param response
  */
 async function requestGuestForGroup(request, response) {
-    // TODO Check that user is authenticated and that phone number is defined in group
+    if (!request.user) throw new Error('Unauthorized. You must be authenticated to send responses for your group.');
+
+    const userPhoneNumber = request.user.phone_number;
     const id = request.params.id;
+    if (!isPhoneNumberInGroup(userPhoneNumber, id)) throw new Error('Unauthorized. Your phone number is not registered for this group.');
+
     const {firstName, lastName, phoneNumber} = request.body;
     if (!firstName || !lastName) throw new Error('First name and last name are mandatory. Phone number is optional.');
     const ref = await admin.firestore().collection('Requests').add({
@@ -119,8 +132,12 @@ async function requestGuestForGroup(request, response) {
  * @returns {Promise<void>}
  */
 async function respondToGroup(request, response) {
-    // TODO Check that user is authenticated and that phone number is defined in group
+    if (!request.user) throw new Error('Unauthorized. You must be authenticated to send responses for your group.');
+
+    const userPhoneNumber = request.user.phone_number;
     const id = request.params.id;
+    if (!isPhoneNumberInGroup(userPhoneNumber, id)) throw new Error('Unauthorized. Your phone number is not registered for this group.');
+
     const responses = request.body;
     const firestore = admin.firestore();
     const guests = await firestore.collection('Groups').doc(id).collection('Guests');
@@ -190,4 +207,12 @@ async function auth(request, response, next) {
     } finally {
         next();
     }
+}
+
+async function isPhoneNumberInGroup(phoneNumber, groupId) {
+    const snapshot = await admin.firestore().collection('Groups').doc(groupId).collection('PhoneNumbers').get();
+    const phoneNumbers = snapshot.docs;
+    return _.some(phoneNumbers, snapshot => {
+        return snapshot.data().phoneNumber === phoneNumber;
+    });
 }
