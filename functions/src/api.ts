@@ -12,6 +12,8 @@ export const app = express();
 
 app.use(bodyParser.json());
 
+app.use(auth);
+
 app.get('/', wrapHandler(root));
 
 app.get('/guest/search/:query', wrapHandler(searchGuest));
@@ -169,4 +171,23 @@ async function deep(documentSnapshot) {
         });
     });
     return document;
+}
+
+/**
+ * Auth middleware. Verify user from Authorization token and save it to request `user` property.
+ * @param request
+ * @param response
+ * @param next
+ * @returns {Promise<void>}
+ */
+async function auth(request, response, next) {
+    try {
+        const authorization = request.headers.authorization;
+        if (authorization && authorization.startsWith("Bearer ")) {
+            let idToken = authorization.split("Bearer ")[1];
+            request.user = await admin.auth().verifyIdToken(idToken);
+        }
+    } finally {
+        next();
+    }
 }
