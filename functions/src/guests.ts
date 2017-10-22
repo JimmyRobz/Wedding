@@ -4,7 +4,7 @@ import { usingGuests } from './algolia';
 
 // == API ==
 
-const guest = functions.firestore.document('/Groups/{groupId}/Guests/{guestId}');
+const guest = functions.firestore.document('/groups/{groupId}/guests/{guestId}');
 
 export const onCreate = guest.onCreate(_onCreate);
 export const onUpdate = guest.onUpdate(_onUpdate);
