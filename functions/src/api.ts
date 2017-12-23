@@ -79,9 +79,7 @@ async function requestGuest(request, response) {
     if (request.user.phone_number !== phoneNumber) throw forbidden('Authenticated phone number does not match the one from the request');
     if (!firstName || !lastName || !phoneNumber) throw badRequest('First name, last name and phone number are mandatory');
     const ref = await admin.firestore().collection('requests').add({
-        firstName,
-        lastName,
-        phoneNumber
+        firstName, lastName, phoneNumber
     });
     response.send({id: ref.id});
 }
@@ -195,16 +193,13 @@ async function deep(documentSnapshot) {
  * @returns {Promise<void>}
  */
 async function auth(request, response, next) {
-    try {
-        const authorization = request.headers.authorization;
-        const prefix = 'Bearer ';
-        if (authorization && authorization.startsWith(prefix)) {
-            let idToken = authorization.substring(prefix.length);
-            request.user = await admin.auth().verifyIdToken(idToken);
-        }
-    } finally {
-        next();
+    const authorization = request.headers.authorization;
+    const prefix = 'Bearer ';
+    if (authorization && authorization.startsWith(prefix)) {
+        let idToken = authorization.substring(prefix.length);
+        request.user = await admin.auth().verifyIdToken(idToken);
     }
+    next();
 }
 
 /**
