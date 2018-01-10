@@ -1,65 +1,254 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>Ophélie &amp; Jimmy</title>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/4.2.0/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/4.2.0/firebase-auth.js"></script>
-    <script defer src="/__/firebase/4.2.0/firebase-database.js"></script>
-    <script defer src="/__/firebase/4.2.0/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/4.2.0/firebase-storage.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+<header>
+    <div id="header" class="fullwidth flex">
+        <h1 class="title">Ophélie <span class="colored">&amp;</span> Jimmy</h1>
+        <h2>Vendredi 12 <span class="colored">Octobre</span> 2017</h2>
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+    <div id="nav-container">
+        <nav class="fullwidth flex">
+            <a data-navigo href="us" class="active">Nous</a>
+            <a data-navigo href="wedding">Quand ?</a>
+            <a data-navigo href="story">Notre histoire</a>
+            <a data-navigo href="events">Programme</a>
+            <a data-navigo href="pictures">Photos</a>
+            <a data-navigo href="rsvp">Invitations</a>
+        </nav>
+    </div>
+</header>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+<section id="us">
 
-        try {
-          let app = firebase.app();
-          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
-          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
+    <div class="overlay"></div>
+
+    <div id="us-content" class="fullwidth">
+        <h2 class="title">On se marie !</h2>
+
+        <div id="us-card-container">
+
+            <div id="us-card-ophelie" class="card">
+                <div class="card-header flex">
+                    <div class="card-name flex-grow">
+                        <div class="title colored">Ophélie</div>
+                        <div>Laup</div>
+                    </div>
+
+                    <div class="card-avatar"></div>
+                </div>
+                <p>
+                    Nulla eros eros, tincidunt in tempor vitae, pellentesque non mi. Mauris eu molestie lacus, eget dictum orci. Etiam semper mauris neque, in posuere lacus varius.
+                </p>
+            </div>
+
+            <div id="us-card-jimmy" class="card">
+                <div class="card-header flex">
+                    <div class="card-avatar"></div>
+
+                    <div class="card-name flex-grow">
+                        <div class="title colored">Jimmy</div>
+                        <div>Robert</div>
+                    </div>
+                </div>
+                <p>
+                    Après plus de dix ans de vie commune, Ophélie m'a dit oui. Je suis donc heureux de vous annoncer notre union qui aura lieu en octobre 2018 sous le soleil réunionnais auprès de nos
+                    amis et de notre famille.
+                </p>
+            </div>
+
+            <img src="assets/heart.png">
+        </div>
+    </div>
+</section>
+
+<section id="wedding">
+    <h2 class="title">Vendredi 12 <span class="colored">Octobre</span> 2018</h2>
+
+    <div id="wedding-day-countdown" class="flex fullwidth">
+        <div id="wedding-day-countdown-days" class="countdown-part flex-grow">
+            <div class="countdown-value">&nbsp;</div>
+            <div class="countdown-unit">JOURS</div>
+        </div>
+        <div id="wedding-day-countdown-hours" class="countdown-part flex-grow">
+            <div class="countdown-value">&nbsp;</div>
+            <div class="countdown-unit">HEURES</div>
+        </div>
+        <div id="wedding-day-countdown-minutes" class="countdown-part flex-grow">
+            <div class="countdown-value">&nbsp;</div>
+            <div class="countdown-unit">MINUTES</div>
+        </div>
+        <div id="wedding-day-countdown-seconds" class="countdown-part flex-grow">
+            <div class="countdown-value">&nbsp;</div>
+            <div class="countdown-unit">SECONDES</div>
+        </div>
+    </div>
+</section>
+
+<section id="story">
+    <h2 class="title">Notre histoire</h2>
+
+    <div id="story-rows">
+
+        <div id="story-line"></div>
+
+        <div class="story-row fullwidth">
+
+            <div class="story-picture">
+
+                <div class="story-date">
+                    <p class="story-date-year title">2004</p>
+                    <p class="story-date-month">Sept</p>
+                </div>
+
+            </div>
+
+            <div class="story-text">
+                <h3 class="story-title title">Notre rencontre</h3>
+                <p class="story-content">
+                    On s'est rencontré en 2nde, à la rentrée 2004, au lycée de Bras-Panon dans la classe de M. Muller. On est rapidement passé de camarades de classe à amis, mais à ce moment là aucun
+                    de nous deux ne pensaient vraiment à ce qui allait se passer.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="story-row fullwidth">
+
+            <div class="story-picture">
+
+                <div class="story-date">
+                    <p class="story-date-year title">2006</p>
+                    <p class="story-date-month">Sept</p>
+                </div>
+
+            </div>
+
+            <div class="story-text">
+                <h3 class="story-title title">Début de l'amourette</h3>
+                <p class="story-content">
+                    On s'est rencontré en 2nde, à la rentrée 2004, au lycée de Bras-Panon dans la classe de M. Muller. On est rapidement passé de camarades de classe à amis, mais à ce moment là aucun
+                    de nous deux ne pensaient vraiment à ce qui allait se passer.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="story-row fullwidth">
+
+            <div class="story-picture">
+
+                <div class="story-date">
+                    <p class="story-date-year title">2007</p>
+                    <p class="story-date-month">Août</p>
+                </div>
+
+            </div>
+
+            <div class="story-text">
+                <h3 class="story-title title">Vie commune</h3>
+                <p class="story-content">
+                    On s'est rencontré en 2nde, à la rentrée 2004, au lycée de Bras-Panon dans la classe de M. Muller. On est rapidement passé de camarades de classe à amis, mais à ce moment là aucun
+                    de nous deux ne pensaient vraiment à ce qui allait se passer.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="story-row fullwidth">
+
+            <div class="story-picture">
+
+                <div class="story-date">
+                    <p class="story-date-year title">2014</p>
+                    <p class="story-date-month">Juin</p>
+                </div>
+
+            </div>
+
+            <div class="story-text">
+                <h3 class="story-title title">PACSés comme jamais</h3>
+                <p class="story-content">
+                    On s'est rencontré en 2nde, à la rentrée 2004, au lycée de Bras-Panon dans la classe de M. Muller. On est rapidement passé de camarades de classe à amis, mais à ce moment là aucun
+                    de nous deux ne pensaient vraiment à ce qui allait se passer.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="story-row fullwidth">
+
+            <div class="story-picture">
+
+                <div class="story-date">
+                    <p class="story-date-year title">2016</p>
+                    <p class="story-date-month">Juill</p>
+                </div>
+
+            </div>
+
+            <div class="story-text">
+                <h3 class="story-title title">Naissance du petit nous</h3>
+                <p class="story-content">
+                    On s'est rencontré en 2nde, à la rentrée 2004, au lycée de Bras-Panon dans la classe de M. Muller. On est rapidement passé de camarades de classe à amis, mais à ce moment là aucun
+                    de nous deux ne pensaient vraiment à ce qui allait se passer.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="story-row fullwidth">
+
+            <div class="story-picture">
+
+                <div class="story-date">
+                    <p class="story-date-year title">2016</p>
+                    <p class="story-date-month">Sept</p>
+                </div>
+
+            </div>
+
+            <div class="story-text">
+                <h3 class="story-title title">10 ans et demande en mariage</h3>
+                <p class="story-content">
+                    On s'est rencontré en 2nde, à la rentrée 2004, au lycée de Bras-Panon dans la classe de M. Muller. On est rapidement passé de camarades de classe à amis, mais à ce moment là aucun
+                    de nous deux ne pensaient vraiment à ce qui allait se passer.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="events">
+    <h2 class="title">Programme</h2>
+</section>
+
+<section id="pictures">
+    <h2 class="title">Photos</h2>
+</section>
+
+<section id="rsvp">
+    <h2 class="title">Invitations</h2>
+</section>
+
+<section id="thanks">
+    <h2 class="title">Merci <3</h2>
+</section>
+
+<script src="//unpkg.com/navigo@6"></script>
+<script type="text/javascript" src="libs/jquery-3.2.1.slim.min.js"></script>
+<script type="text/javascript" src="libs/moment.min.js"></script>
+<script type="text/javascript" src="libs/moment-timezone-with-data-2012-2022.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</body>
 </html>

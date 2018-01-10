@@ -1,0 +1,9 @@
+@import "mixins";
+
+main {
+    padding-top: 48px;
+
+    @include min-width(480px) {
+        padding-top: 64px;
+    }
+}

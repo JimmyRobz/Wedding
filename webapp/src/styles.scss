@@ -1,0 +1,63 @@
+@import "vars";
+@import "~reset-css/reset";
+
+@font-face {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    src: local("Roboto"), local("Roboto-Regular"), url("assets/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    src: local("Roboto Light"), local("Roboto-Light"), url("assets/Roboto-Light.ttf");
+}
+
+@font-face {
+    font-family: Courgette;
+    font-style: normal;
+    font-weight: 400;
+    src: local("Courgette"), local("Courgette Regular"), url("assets/Courgette-Regular.ttf");
+}
+
+* {
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    color: $textColor;
+    font-family: Roboto, Arial, sans-serif;
+    font-weight: 300;
+
+    overflow-x: hidden;
+}
+
+.cursive {
+    font-family: Courgette, cursive;
+}
+
+.expand {
+    flex: 1;
+}
+
+.colored {
+    color: $primaryColor;
+}
+
+.fullwidth {
+    width: 100%;
+    max-width: 980px;
+    margin: auto;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.flex-grow {
+    flex: 1;
+}

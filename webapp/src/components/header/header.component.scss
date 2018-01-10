@@ -1,0 +1,62 @@
+@import "vars";
+@import "mixins";
+
+:host {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    background-color: white;
+    @include shadow;
+
+    &.flat {
+        box-shadow: none;
+    }
+}
+
+#header-title-row {
+    height: $headerSize;
+
+    @include min-width(480px) {
+        height: $headerSizeLarge;
+    }
+}
+
+h1 {
+    color: $strongColor;
+    font-size: 20px;
+    margin: 0 $defaultSpace;
+
+    @include min-width(480px) {
+        font-size: 24px;
+    }
+}
+
+.header-date {
+    font-size: 14px;
+    margin-right: $defaultSpace;
+
+    transform: translateY(3px);
+
+    @include min-width(480px) {
+        font-size: 16px;
+    }
+}
+
+#header-date-long {
+    display: none;
+
+    @include min-width(480px) {
+        display: block;
+    }
+}
+
+#header-date-short {
+    display: block;
+
+    @include min-width(480px) {
+        display: none;
+    }
+}

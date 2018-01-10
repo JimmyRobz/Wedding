@@ -1,0 +1,584 @@
+/************************************/
+/* Fonts
+/************************************/
+
+@font-face {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    src: local("Roboto"), local("Roboto-Regular"), url("assets/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    src: local("Roboto Light"), local("Roboto-Light"), url("assets/Roboto-Light.ttf");
+}
+
+@font-face {
+    font-family: Courgette;
+    font-style: normal;
+    font-weight: 400;
+    src: local("Courgette"), local("Courgette Regular"), url("assets/Courgette-Regular.ttf");
+}
+
+/************************************/
+/* Common
+/************************************/
+
+body {
+    font-family: Roboto, Arial, sans-serif;
+    color: #666;
+
+    font-weight: 300;
+
+    margin: 0;
+
+    overflow-x: hidden;
+    padding-top: 104px;
+}
+
+* {
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.title {
+    font-family: Courgette, cursive;
+    color: #333;
+}
+
+.colored {
+    color: #ff8578;
+}
+
+.fullwidth {
+    width: 100%;
+    max-width: 980px;
+    margin: auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-grow {
+    flex-grow: 1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(53, 53, 53, 0.3);
+}
+
+.card {
+    background-color: white;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+    padding: 16px;
+    margin: 16px;
+}
+
+.card-name {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.card-header > div {
+    align-self: center;
+}
+
+.card-name .title {
+    font-size: 24px;
+    font-weight: 400;
+    margin: 4px 0;
+}
+
+.card-avatar {
+    width: 76px;
+    height: 76px;
+    border-radius: 38px;
+    background-position: center;
+    background-size: cover;
+}
+
+section > h2 {
+    text-align: center;
+}
+
+/************************************/
+/* Header
+/************************************/
+
+header {
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+#header {
+    height: 52px;
+}
+
+#nav-container {
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+header h1 {
+    font-size: 21px;
+    flex: 1;
+    margin: 0 16px;
+    align-self: center;
+}
+
+header h2 {
+    font-size: 18px;
+    margin: 0 16px;
+    align-self: center;
+    font-weight: 300;
+
+    display: none;
+}
+
+/************************************/
+/* Navigation
+/************************************/
+
+nav {
+    padding: 0;
+}
+
+nav > a {
+    text-align: center;
+    height: 52px;
+    line-height: 52px;
+    font-size: 14px;
+    padding: 0 8px;
+    flex-grow: 1;
+    color: #666;
+    text-decoration: none;
+
+    white-space: nowrap;
+}
+
+nav > a.active {
+    color: #ff8578;
+    border-bottom: 4px solid #ff8578;
+}
+
+nav > a:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+nav > a.active:hover {
+    background-color: transparent;
+}
+
+/************************************/
+/* Us
+/************************************/
+
+#us {
+    position: relative;
+
+    background-size: cover;
+    background-position: center;
+    background-image: url("assets/hold-hands.jpg");
+
+    z-index: 25;
+}
+
+#us::before, #us::after {
+    display: table;
+    content: '';
+}
+
+#us h2 {
+    margin: 44px 16px;
+    color: white;
+    font-size: 44px;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
+    font-weight: 400;
+}
+
+#us-content {
+    position: relative;
+}
+
+#us-card-container {
+    display: block;
+    position: relative;
+}
+
+#us-card-container > img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 72px;
+}
+
+#us-card-jimmy .card-avatar {
+    background-image: url("assets/jimmy.jpg");
+}
+
+#us-card-ophelie .card-avatar {
+    background-image: url("assets/ophelie.jpg");
+}
+
+/************************************/
+/* Wedding
+/************************************/
+
+#wedding {
+    position: relative;
+    z-index: 50;
+    background-color: white;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2)
+}
+
+#wedding::before, #wedding::after {
+    display: table;
+    content: '';
+}
+
+#wedding-day-countdown {
+    margin-bottom: 48px;
+}
+
+.countdown-part {
+    background-color: #ff8578;
+    text-align: center;
+    color: white;
+    padding: 8px;
+    margin: 2px;
+    border-radius: 2px;
+}
+
+.countdown-value {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.countdown-unit {
+    font-size: 14px;
+}
+
+#wedding-day-countdown-seconds {
+    display: none;
+}
+
+/************************************/
+/* Story
+/************************************/
+
+#story {
+    background-color: #fcfcfc;
+}
+
+#story::before, #story::after {
+    display: table;
+    content: '';
+}
+
+#story-rows {
+    position: relative;
+}
+
+.story-row {
+    position: relative;
+    z-index: 1;
+    margin: 48px auto;
+}
+
+#story-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.story-picture {
+    position: relative;
+    width: 80vw;
+    height: 80vw;
+    max-width: 280px;
+    max-height: 280px;
+    background-color: #888888;
+    border-radius: 40vw;
+    margin: auto;
+}
+
+.story-date {
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    background-image: url("assets/heart-full.png");
+    background-size: contain;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+.story-date-year {
+    font-size: 21px;
+    margin: 20px 0 0 0;
+    text-align: center;
+    color: white;
+}
+
+.story-date-month {
+    font-size: 14px;
+    margin: 0;
+    text-align: center;
+    color: white;
+}
+
+.story-text::before {
+    display: table;
+    content: '';
+}
+
+.story-text {
+    text-align: center;
+    margin-top: 45px;
+}
+
+.story-title {
+    font-size: 24px;
+}
+
+.story-content {
+    font-size: 16px;
+    padding: 0 16px;
+}
+
+/************************************/
+/* Events
+/************************************/
+
+#events {
+    background-color: white;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 50;
+}
+
+#events::before, #events::after {
+    display: table;
+    content: '';
+}
+
+/************************************/
+/* Pictures
+/************************************/
+
+#pictures {
+    background-color: #fcfcfc;
+}
+
+#pictures::before, #pictures::after {
+    display: table;
+    content: '';
+}
+
+/************************************/
+/* RSVP
+/************************************/
+
+#rsvp {
+    background-color: white;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 50;
+}
+
+#rsvp::before, #rsvp::after {
+    display: table;
+    content: '';
+}
+
+/************************************/
+/* Thanks
+/************************************/
+
+#thanks {
+    background-image: url("assets/thanks.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+#thanks::before, #thanks::after {
+    display: table;
+    content: '';
+}
+
+#thanks > h2 {
+    margin: 128px 16px;
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
+    font-weight: 400;
+    font-size: 44px;
+}
+
+/************************************/
+/* 320px
+/************************************/
+
+@media (min-width: 321px) {
+    #wedding-day-countdown-seconds {
+        display: block;
+    }
+}
+
+/************************************/
+/* 480px
+/************************************/
+
+@media (min-width: 481px) {
+    header h2 {
+        display: block;
+    }
+}
+
+/************************************/
+/* 580px
+/************************************/
+
+@media (min-width: 581px) {
+    #nav-container {
+        overflow: hidden;
+    }
+
+    nav > a {
+        font-size: 16px;
+    }
+
+    #us h2 {
+        font-size: 60px;
+    }
+
+    #us-card-container {
+        display: flex;
+        justify-content: center;
+        transform: translateY(24px);
+    }
+
+    #us-card-container .card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    #us-card-container > img {
+        transform: translate(-50%, -80%);
+    }
+
+    .countdown-part {
+        padding: 16px;
+        margin: 8px;
+    }
+
+    .countdown-value {
+        font-size: 40px;
+    }
+
+    .countdown-unit {
+        font-size: 16px;
+    }
+
+    section h2 {
+        font-size: 36px;
+    }
+
+    #thanks h2 {
+        font-size: 60px;
+    }
+}
+
+/************************************/
+/* 980px
+/************************************/
+
+@media (min-width: 981px) {
+
+    body {
+        padding-top: 116px;
+    }
+
+    #header {
+        height: 64px;
+    }
+
+    header h1 {
+        font-size: 27px;
+    }
+
+    #story-line {
+        display: block;
+    }
+
+    .story-row {
+        display: flex;
+    }
+
+    .story-picture {
+        flex-grow: 1;
+    }
+
+    .story-text {
+        flex-grow: 1;
+        max-width: 50%;
+        text-align: left;
+    }
+
+    .story-title {
+        margin-left: 96px;
+    }
+
+    .story-content {
+        margin-left: 96px;
+        margin-right: 16px;
+        padding: 0;
+    }
+
+    .story-picture {
+        position: static;
+    }
+
+    .story-date {
+        top: 50%;
+        bottom: auto;
+        transform: translate(-50%, -50%);
+    }
+
+    .story-row:nth-child(odd) .story-picture {
+        order: 2;
+    }
+
+    .story-row:nth-child(odd) .story-title {
+        margin: 0 96px 0 16px;
+    }
+
+    .story-row:nth-child(odd) .story-content {
+        margin-left: 16px;
+        margin-right: 96px;
+        padding: 0;
+    }
+}

@@ -1,0 +1,72 @@
+@import "vars";
+@import "mixins";
+
+#nav-container {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    margin-top: $headerSize;
+
+    @include min-width(480px) {
+        margin-top: $headerSizeLarge;
+    }
+
+    background-color: white;
+
+    @include shadow;
+
+    overflow-x: scroll;
+    overflow-y: hidden
+}
+
+$tabSize: 40px;
+$tabSizeLarge: 48px;
+$tabIndicatorSize: 4px;
+
+#home-sections {
+    > /deep/ * {
+        display: block;
+    }
+
+    margin-top: $tabSize + $tabIndicatorSize;
+
+    @include min-width(480px) {
+        margin-top: $tabSizeLarge + $tabIndicatorSize;
+    }
+}
+
+nav a {
+    border-bottom: $tabIndicatorSize solid transparent;
+    flex: 1;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    color: $textColor;
+    font-size: 14px;
+    padding: 0 $smallSpace;
+
+    text-align: center;
+    line-height: $tabSize;
+
+    @include min-width(480px) {
+        font-size: 16px;
+        line-height: $tabSizeLarge;
+    }
+
+    &:hover {
+        background-color: #F8F8F8;
+    }
+
+    :host-context(.touch) &:hover {
+        background-color: transparent;
+    }
+
+    -webkit-tap-highlight-color: transparent;
+
+    &.active {
+        color: $primaryColor;
+        border-color: $primaryColor;
+    }
+}
