@@ -1,0 +1,109 @@
+@import "vars";
+@import "mixins";
+
+:host {
+    position: relative;
+    z-index: 10;
+
+    background-size: cover;
+    background: url("/assets/images/us.background.jpg") no-repeat center;
+}
+
+#us-content {
+    position: relative;
+}
+
+#us-card-container {
+    display: block;
+    position: relative;
+
+    @include min-width(580px) {
+        display: flex;
+        justify-content: center;
+        transform: translateY(24px);
+    }
+
+    > img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 72px;
+
+        @include min-width(580px) {
+            top: 40%;
+        }
+    }
+
+}
+
+#us-card-jimmy .card-avatar {
+    //background-image: url("assets/jimmy.jpg");
+}
+
+#us-card-ophelie .card-avatar {
+    //background-image: url("assets/ophelie.jpg");
+}
+
+#us-background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(53, 53, 53, 0.3);
+}
+
+h2 {
+    margin: 44px 16px;
+    color: white;
+    font-size: 44px;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
+    font-weight: 400;
+
+    @include min-width(580px) {
+        font-size: 60px;
+    }
+}
+
+.card {
+    background-color: white;
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+    padding: $defaultSpace;
+    margin: $defaultSpace;
+
+    @include min-width(580px) {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    p {
+        margin: $defaultSpace 0;
+    }
+}
+
+.card-name {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.card-header > div {
+    align-self: center;
+}
+
+.card-name .cursive {
+    font-size: 24px;
+    font-weight: 400;
+    margin: 4px 0;
+}
+
+.card-avatar {
+    width: 76px;
+    height: 76px;
+    border-radius: 38px;
+    background-size: cover;
+    background: #9c9c9c center;
+}

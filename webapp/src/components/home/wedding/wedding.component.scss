@@ -1,0 +1,47 @@
+@import "vars";
+@import "mixins";
+
+:host {
+    position: relative;
+    z-index: 20;
+
+    @include min-width(580px) {
+        box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.26)
+    }
+}
+
+.countdown-part {
+    background-color: $primaryColor;
+    text-align: center;
+    color: white;
+    padding: $smallSpace;
+    margin: 2px;
+    border-radius: 1px;
+
+    @include min-width(580px) {
+        padding: $defaultSpace;
+        margin: $smallSpace;
+    }
+}
+
+.countdown-value {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 4px;
+
+    @include min-width(580px) {
+        font-size: 40px;
+    }
+}
+
+.countdown-unit {
+    font-size: 14px;
+
+    @include min-width(580px) {
+        font-size: 16px;
+    }
+}
+
+#wedding-day-countdown-seconds {
+    display: none;
+}

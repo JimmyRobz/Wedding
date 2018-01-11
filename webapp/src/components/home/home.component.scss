@@ -3,6 +3,7 @@
 
 #nav-container {
     position: fixed;
+    z-index: 99;
     width: 100%;
     top: 0;
     left: 0;
@@ -27,6 +28,44 @@ $tabIndicatorSize: 4px;
 #home-sections {
     > /deep/ * {
         display: block;
+        border-top: 1px solid #EBEBEB;
+
+        padding: 36px 0;
+
+        @include min-width(580px) {
+            padding: 48px 0;
+        }
+
+        &::before, &::after {
+            display: table;
+            content: '';
+        }
+
+        &:first-child {
+            border-top: none;
+            padding: 0;
+        }
+
+        &:nth-child(even) {
+            background-color: white;
+        }
+
+        &:nth-child(odd) {
+            background-color: #FCFCFC;
+        }
+
+        > h2 {
+            text-align: center;
+            font-size: 24px;
+            color: #333333;
+            margin-bottom: $largeSpace;
+            font-family: Courgette, cursive;
+
+            @include min-width(580px) {
+                font-size: 36px;
+            }
+        }
+
     }
 
     margin-top: $tabSize + $tabIndicatorSize;
