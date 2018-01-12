@@ -10,6 +10,7 @@ export class WeddingComponent implements OnInit, OnDestroy {
 
     static title = 'Mariage';
     static fragment = 'wedding';
+    static active = false;
 
     daysValue = '-';
     hoursValue = '-';

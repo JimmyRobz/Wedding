@@ -1,0 +1,144 @@
+@import "mixins";
+@import "vars";
+
+$storyContentMargin: 96px;
+
+#story-rows {
+    position: relative;
+}
+
+.story-row {
+    position: relative;
+    z-index: 1;
+    margin: 48px auto;
+    align-items: center;
+
+    @include min-width(980px) {
+        display: flex;
+    }
+
+    &:nth-child(odd) {
+
+        .story-picture {
+            @include min-width(980px) {
+                order: 2;
+            }
+        }
+
+        .story-title {
+            @include min-width(980px) {
+                margin-right: $storyContentMargin;
+                margin-left: $defaultSpace;
+            }
+        }
+
+        .story-content {
+            @include min-width(980px) {
+                margin-left: $defaultSpace;
+                margin-right: $storyContentMargin;
+                padding: 0;
+            }
+        }
+    }
+
+}
+
+#story-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.1);
+    display: none;
+
+    @include min-width(980px) {
+        display: block;
+    }
+}
+
+.story-picture {
+    position: relative;
+    width: 80vw;
+    height: 80vw;
+    max-width: 280px;
+    max-height: 280px;
+    background-color: #888888;
+    border-radius: 40vw;
+    margin: auto;
+
+    @include min-width(980px) {
+        position: static;
+        flex-grow: 1;
+    }
+}
+
+.story-date {
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    background-image: url("/assets/images/heart.full.png");
+    background-size: contain;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+
+    @include min-width(980px) {
+        top: 50%;
+        bottom: auto;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.story-date-year {
+    font-size: 21px;
+    margin: $largeSpace 0 0 0;
+    text-align: center;
+    color: white;
+}
+
+.story-date-month {
+    font-size: 14px;
+    margin: 2px 0 0 0;
+    text-align: center;
+    color: white;
+}
+
+.story-text {
+    text-align: center;
+    margin-top: 48px;
+
+    &::before {
+        display: table;
+        content: '';
+    }
+
+    @include min-width(980px) {
+        flex-grow: 1;
+        max-width: 50%;
+        margin-top: 0;
+        text-align: left;
+    }
+}
+
+.story-title {
+    font-size: 24px;
+    margin-bottom: $largeSpace;
+    color: $strongColor;
+
+    @include min-width(980px) {
+        margin-left: $storyContentMargin;
+    }
+}
+
+.story-content {
+    font-size: 16px;
+    padding: 0 $defaultSpace;
+
+    @include min-width(980px) {
+        margin-left: $storyContentMargin;
+        margin-right: $defaultSpace;
+        padding: 0;
+    }
+}

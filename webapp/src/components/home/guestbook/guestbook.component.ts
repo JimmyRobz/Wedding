@@ -7,8 +7,9 @@ import { Component, ElementRef } from '@angular/core';
 })
 export class GuestbookComponent {
 
-    static title = 'Livre d\'or';
+    static title = "Livre d'or";
     static fragment = 'guestbook';
+    static active = false;
 
     constructor(private el: ElementRef) {
     }

@@ -9,6 +9,7 @@ export class UsComponent {
 
     static title = 'Nous';
     static fragment = 'us';
+    static active = false;
 
     constructor(private el: ElementRef) {
     }

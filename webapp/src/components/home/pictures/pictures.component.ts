@@ -9,6 +9,7 @@ export class PicturesComponent {
 
     static title = 'Photos';
     static fragment = 'pictures';
+    static active = false;
 
     constructor(private el: ElementRef) {
     }

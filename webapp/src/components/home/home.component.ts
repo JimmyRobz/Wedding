@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public sections = HOME_SECTIONS;
 
-    public activeTab: String;
+    public activeTab: string;
     public currentFragment: String;
 
     private scrollOffset = 0;
@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         this.scrollOffset = this.sectionsContainer.nativeElement.offsetTop;
     }
 
-    private async onFragmentChange(fragment: String) {
+    private async onFragmentChange(fragment: string) {
         if (fragment != null) {
             this.currentFragment = fragment;
             this.activeTab = fragment;
@@ -84,7 +84,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
     @HostListener('window:scroll', ['$event'])
     private onScroll(event) {
-        const scrollTop = document.documentElement.scrollTop;
+        const scrollTop = document.scrollingElement.scrollTop;
 
         if (scrollTop + window.innerHeight >= document.documentElement.offsetHeight) return;
 

@@ -9,6 +9,7 @@ export class EventsComponent {
 
     static title = 'Programme';
     static fragment = 'events';
+    static active = false;
 
     constructor(private el: ElementRef) {
     }
