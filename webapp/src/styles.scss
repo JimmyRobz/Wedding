@@ -1,4 +1,6 @@
 @import "vars";
+@import "mixins";
+
 @import "~reset-css/reset";
 
 @font-face {
@@ -50,8 +52,12 @@ body {
 
 .fullwidth {
     width: 100%;
-    max-width: 980px;
+    max-width: 750px;
     margin: auto;
+
+    @include min-width(980px) {
+        max-width: 980px;
+    }
 }
 
 .flex {

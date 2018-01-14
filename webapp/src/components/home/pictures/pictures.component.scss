@@ -1,0 +1,55 @@
+@import "vars";
+@import "mixins";
+
+#gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    padding: 0 $smallSpace;
+}
+
+.picture-container {
+
+    width: 100%;
+    height: 56vw;
+    margin-top: $tinySpace;
+
+    @include min-width(480px) {
+        width: 49.7%;
+        height: 480px * 0.56 / 2;
+    }
+
+    @include min-width(750px) {
+        width: 33%;
+        height: 750px * 0.56 / 3;
+    }
+
+    @include min-width(980px) {
+        height: 980px * 0.56 / 3;
+    }
+
+    overflow: hidden;
+
+    > div {
+
+        -webkit-tap-highlight-color: transparent;
+
+        height: 100%;
+
+        cursor: pointer;
+
+        background-size: cover;
+        background: no-repeat center;
+
+        transition: transform 0.25s;
+
+        &:hover {
+            transform: scale(1.1, 1.1);
+        }
+
+        :host-context(.touch) &:hover {
+            transform: none;
+        }
+    }
+}

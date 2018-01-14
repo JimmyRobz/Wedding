@@ -1,0 +1,106 @@
+@import "vars";
+@import "mixins";
+
+#events-description {
+    text-align: center;
+    padding: 0 $defaultSpace;
+}
+
+#events-cards {
+
+    @include min-width(980px) {
+        display: flex;
+        margin-top: $largeSpace;
+    }
+
+}
+
+.event-card {
+    margin: $largeSpace $defaultSpace 0;
+    max-width: 750px;
+
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+
+    border-radius: 2px;
+
+    @include min-width(980px) {
+        flex-basis: 0;
+        flex-grow: 1;
+        margin: 0 $defaultSpace;
+    }
+
+    h3 {
+        font-size: 21px;
+        color: white;
+        background-color: $primaryColor;
+        padding: $defaultSpace;
+        text-align: center;
+
+        @include min-width(480px) {
+            font-size: 24px;
+        }
+    }
+
+    a {
+        display: inline-block;
+        margin: $largeSpace auto 0;
+
+        text-decoration: none;
+        padding: $defaultSpace $mediumSpace;
+
+        color: white;
+        background-color: $primaryColor;
+        border-radius: 2px;
+
+        -webkit-tap-highlight-color: transparent;
+
+        &:hover {
+            background-color: darken($primaryColor, 5%);
+
+            :host-context(.touch) & {
+                background-color: $primaryColor;
+            }
+        }
+    }
+}
+
+.event-picture-container {
+
+    overflow: hidden;
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+
+        transition: transform 0.25s;
+
+        &:hover {
+            transform: scale(1.1, 1.1);
+        }
+
+        :host-context(.touch) &:hover {
+            transform: none;
+        }
+    }
+}
+
+.event-info {
+    padding: $largeSpace;
+
+    p {
+        margin-top: $smallSpace;
+        text-align: center;
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        .material-icons {
+            font-size: 18px;
+            vertical-align: text-top;
+            margin-right: $smallSpace;
+            color: $primaryColor;
+        }
+    }
+}
