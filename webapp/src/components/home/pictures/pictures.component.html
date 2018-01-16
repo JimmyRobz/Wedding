@@ -1,6 +1,17 @@
 <h2>Photos</h2>
-<div id="gallery" class="fullwidth">
-    <div *ngFor="let image of images" class="picture-container">
-        <div [style.background-image]="sanitize(image.url)"></div>
+<!--<div id="gallery" class="fullwidth">-->
+<!--<div *ngFor="let image of images" class="picture-container">-->
+<!--<div [style.background-image]="sanitize(image.url)"></div>-->
+<!--</div>-->
+<!--</div>-->
+
+<div id="gallery-linear" class="gallery">
+    <div *ngFor="let image of images" class="photo-container">
+        <img [src]="sanitize(image.url)" class="image-thumb"/>
     </div>
 </div>
+
+<div #tinyGallery id="gallery-tiny" class="gallery"></div>
+<div #smallGallery id="gallery-small" class="gallery"></div>
+<div #mediumGallery id="gallery-medium" class="gallery"></div>
+<div #largeGallery id="gallery-large" class="gallery"></div>

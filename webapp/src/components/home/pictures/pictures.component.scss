@@ -1,55 +1,83 @@
 @import "vars";
 @import "mixins";
 
-#gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-    padding: 0 $smallSpace;
+.gallery {
+    margin: auto;
+    height: 0;
+    overflow: hidden;
+    padding: 0 $defaultSpace;
 }
 
-.picture-container {
-
+#gallery-linear {
     width: 100%;
-    height: 56vw;
-    margin-top: $tinySpace;
+    height: auto;
+
+    @include min-width(359px) {
+        height: 0;
+    }
+
+    .photo-container {
+        float: none;
+        margin-top: $tinySpace;
+    }
+
+    .image-thumb {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+}
+
+#gallery-tiny {
+    width: 360px;
+
+    @include min-width(360px) {
+        height: auto;
+    }
+
+    @include min-width(479px) {
+        height: 0;
+    }
+}
+
+#gallery-small {
+    width: 480px;
 
     @include min-width(480px) {
-        width: 49.7%;
-        height: 480px * 0.56 / 2;
+        height: auto;
     }
+
+    @include min-width(749px) {
+        height: 0;
+    }
+}
+
+#gallery-medium {
+    width: 750px;
 
     @include min-width(750px) {
-        width: 33%;
-        height: 750px * 0.56 / 3;
+        height: auto;
     }
+
+    @include min-width(979px) {
+        height: 0;
+    }
+}
+
+#gallery-large {
+    width: 980px;
 
     @include min-width(980px) {
-        height: 980px * 0.56 / 3;
+        height: auto;
     }
+}
 
-    overflow: hidden;
+:host /deep/ .image-thumb {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.25s;
 
-    > div {
-
-        -webkit-tap-highlight-color: transparent;
-
-        height: 100%;
-
-        cursor: pointer;
-
-        background-size: cover;
-        background: no-repeat center;
-
-        transition: transform 0.25s;
-
-        &:hover {
-            transform: scale(1.1, 1.1);
-        }
-
-        :host-context(.touch) &:hover {
-            transform: none;
-        }
+    &:hover {
+        transform: scale(1.1, 1.1);
     }
 }
