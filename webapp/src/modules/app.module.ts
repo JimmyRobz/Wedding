@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { ScrollToModule } from 'ng2-scroll-to-el';
 
 import { AppComponent } from '../components/app/app.component';
@@ -14,6 +17,7 @@ import { StoryComponent } from '../components/home/story/story.component';
 import { UsComponent } from '../components/home/us/us.component';
 import { WeddingComponent } from '../components/home/wedding/wedding.component';
 import { NotFoundComponent } from '../components/notfound/notfound.component';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
     // Home
@@ -49,8 +53,11 @@ const routes: Routes = [
     ],
     imports: [
         BrowserModule,
+        FormsModule,
         RouterModule.forRoot(routes),
-        ScrollToModule.forRoot()
+        ScrollToModule.forRoot(),
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule
     ],
     providers: [],
     bootstrap: [

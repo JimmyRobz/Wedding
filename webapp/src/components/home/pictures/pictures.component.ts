@@ -1,6 +1,14 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
+const IMAGES = [[800, 600], [600, 800], [1024, 768], [768, 1024], [1920, 1080], [1080, 1920], [1440, 980], [980, 1440], [800, 620], [620, 800], [1440, 920], [920, 1440]].map(size => {
+    return {
+        url: `https://picsum.photos/${size[0]}/${size[1]}`,
+        width: size[0],
+        height: size[1]
+    }
+});
+
 @Component({
     selector: 'pictures',
     templateUrl: './pictures.component.html',
@@ -11,7 +19,7 @@ export class PicturesComponent implements AfterViewInit {
     static title = 'Photos';
     static fragment = 'pictures';
 
-    images: Array<Picture>;
+    images = IMAGES;
 
     @ViewChild('tinyGallery') tinyGallery: ElementRef;
     @ViewChild('smallGallery') smallGallery: ElementRef;
@@ -19,17 +27,6 @@ export class PicturesComponent implements AfterViewInit {
     @ViewChild('largeGallery') largeGallery: ElementRef;
 
     constructor(private sanitizer: DomSanitizer) {
-        this.images = PicturesComponent.createRandomImages();
-    }
-
-    private static createRandomImages(): Array<Picture> {
-        return [[800, 600], [600, 800], [1024, 768], [768, 1024], [1920, 1080], [1080, 1920], [1440, 980], [980, 1440], [800, 620], [620, 800], [1440, 920], [920, 1440]].map(size => {
-            return {
-                url: `https://picsum.photos/${size[0]}/${size[1]}/?random`,
-                width: size[0],
-                height: size[1]
-            }
-        });
     }
 
     ngAfterViewInit() {

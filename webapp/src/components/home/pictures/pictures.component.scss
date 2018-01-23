@@ -12,7 +12,7 @@
     width: 100%;
     height: auto;
 
-    @include min-width(359px) {
+    @include min-width(360px) {
         height: 0;
     }
 
@@ -35,7 +35,7 @@
         height: auto;
     }
 
-    @include min-width(479px) {
+    @include min-width(480px) {
         height: 0;
     }
 }
@@ -47,7 +47,7 @@
         height: auto;
     }
 
-    @include min-width(749px) {
+    @include min-width(780px) {
         height: 0;
     }
 }
@@ -59,7 +59,7 @@
         height: auto;
     }
 
-    @include min-width(979px) {
+    @include min-width(980px) {
         height: 0;
     }
 }

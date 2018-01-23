@@ -79,6 +79,8 @@ nav a {
     border-bottom: $tabIndicatorSize solid transparent;
     flex: 1;
 
+    min-width: min-content;
+
     text-decoration: none;
     white-space: nowrap;
 

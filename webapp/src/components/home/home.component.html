@@ -1,7 +1,7 @@
-<div id="nav-container">
+<div #navContainer id="nav-container">
     <nav class="flex fullwidth">
         <a *ngFor="let section of sections" routerLink="/home" fragment="{{section.fragment}}" [class.active]="activeTab === section.fragment"
-           (click)="onTabClick(section.fragment)">{{section.title}}</a>
+           (click)="onTabClick(section.fragment)" [attr.data-fragment]="section.fragment">{{section.title}}</a>
     </nav>
 </div>
 

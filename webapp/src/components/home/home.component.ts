@@ -41,6 +41,13 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild('sectionsContainer')
     private sectionsContainer: ElementRef;
 
+    @ViewChild('navContainer')
+    private navContainer: ElementRef;
+
+    private get activeTabElement(): HTMLElement {
+        return this.el.nativeElement.querySelector(`[data-fragment=${this.activeTab}]`);
+    }
+
     constructor(private route: ActivatedRoute, private router: Router, private el: ElementRef) {
         route.fragment.subscribe(fragment => this.onFragmentChange(fragment));
     }
@@ -73,6 +80,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         if (fragment != null) {
             this.currentFragment = fragment;
             this.activeTab = fragment;
+            this.scrollToActiveTab();
             this.scrollToFragment();
         } else {
             await this.router.navigate(['/home'], {
@@ -95,7 +103,10 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
             const threshold = scrollTop + this.scrollOffset;
             if (top <= threshold) {
                 const fragment = section.tagName.toLowerCase();
-                if (this.activeTab !== fragment) this.activeTab = fragment;
+                if (this.activeTab !== fragment) {
+                    this.activeTab = fragment;
+                    this.scrollToActiveTab();
+                }
                 return;
             }
         }
@@ -105,5 +116,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         if (this.isViewInitialized && this.currentFragment) {
             scrollTo(0, this.el.nativeElement.querySelector(this.currentFragment).offsetTop - this.scrollOffset);
         }
+    }
+
+    private scrollToActiveTab() {
+        this.navContainer.nativeElement.scrollLeft = this.activeTabElement.offsetLeft - this.navContainer.nativeElement.offsetWidth / 2 + this.activeTabElement.offsetWidth / 2;
     }
 }
