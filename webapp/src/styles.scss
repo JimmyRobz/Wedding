@@ -68,3 +68,37 @@ body {
 .flex-grow {
     flex: 1;
 }
+
+.button {
+    cursor: pointer;
+
+    outline: none;
+    border: none;
+
+    font-size: 16px;
+
+    display: inline-block;
+    margin: $mediumSpace auto 0;
+    text-decoration: none;
+    padding: $defaultSpace $mediumSpace;
+    color: white;
+    background-color: $primaryColor;
+    border-radius: 2px;
+    -webkit-tap-highlight-color: transparent;
+
+    &:hover {
+        background-color: darken($primaryColor, 5%);
+
+        :host-context(.touch) & {
+            background-color: $primaryColor;
+        }
+    }
+
+    &:disabled {
+        background-color: #9c9c9c;
+
+        :host-context(.touch) & {
+            background-color: #9c9c9c;
+        }
+    }
+}

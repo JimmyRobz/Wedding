@@ -32,7 +32,7 @@ const routes: Routes = [
     },
     // Not Found
     {
-        path: 'notfound',
+        path: '**',
         component: NotFoundComponent
     }
 ];
