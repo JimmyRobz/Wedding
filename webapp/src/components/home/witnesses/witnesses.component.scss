@@ -1,0 +1,78 @@
+@import "vars";
+@import "mixins";
+
+#witnesses {
+    flex-wrap: wrap;
+    width: 320px;
+
+    @include min-width(640px) {
+        width: 100%;
+    }
+}
+
+.witness {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    @include min-width(640px) {
+        width: 50%;
+    }
+
+    &:nth-child(even) {
+
+        @include min-width(640px) {
+            transform: translateY($largeSpace);
+        }
+
+        .witness-picture-container {
+            order: 1;
+        }
+
+        .witness-name {
+            order: 2;
+            text-align: left;
+        }
+    }
+
+    &:nth-child(odd) {
+
+        .witness-picture-container {
+            order: 2;
+        }
+
+        .witness-name {
+            order: 1;
+            text-align: right;
+        }
+    }
+}
+
+.witness-picture-container {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    padding: 4px;
+    border: 1px solid #E5E5E5;
+
+    margin: 0 $defaultSpace;
+
+    @include min-width(640px) {
+        margin: $smallSpace $defaultSpace;
+    }
+}
+
+.witness-picture {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.witness-name :first-child {
+    font-size: 24px;
+    font-weight: 400;
+    margin: $tinySpace 0;
+}

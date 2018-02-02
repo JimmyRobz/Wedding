@@ -1,0 +1,18 @@
+<h2>Les témoins</h2>
+
+<div id="witnesses" class="fullwidth flex">
+
+    <div *ngFor="let witness of witnesses" class="witness">
+
+        <div class="witness-picture-container">
+            <div class="witness-picture" [style.background-image]="sanitize(witness.picture)"></div>
+        </div>
+
+        <div class="witness-name flex-grow">
+            <div class="cursive colored">{{witness.firstName}}</div>
+            <div>{{witness.lastName}}</div>
+        </div>
+
+    </div>
+
+</div>

@@ -9,7 +9,6 @@ export class StoryComponent {
 
     static title = 'Notre histoire';
     static fragment = 'story';
-    static active = false;
 
     stories = [
         {

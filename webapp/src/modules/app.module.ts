@@ -16,6 +16,7 @@ import { PicturesComponent } from '../components/home/pictures/pictures.componen
 import { StoryComponent } from '../components/home/story/story.component';
 import { UsComponent } from '../components/home/us/us.component';
 import { WeddingComponent } from '../components/home/wedding/wedding.component';
+import { WitnessesComponent } from '../components/home/witnesses/witnesses.component';
 import { NotFoundComponent } from '../components/notfound/notfound.component';
 import { environment } from '../environments/environment';
 
@@ -44,6 +45,7 @@ const routes: Routes = [
         HomeComponent,
         UsComponent,
         WeddingComponent,
+        WitnessesComponent,
         StoryComponent,
         EventsComponent,
         PicturesComponent,

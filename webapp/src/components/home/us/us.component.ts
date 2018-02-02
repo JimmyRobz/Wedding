@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'us',
@@ -11,10 +11,6 @@ export class UsComponent {
     static fragment = 'us';
     static active = false;
 
-    constructor(private el: ElementRef) {
-    }
-
-    get top(): number {
-        return this.el.nativeElement.offsetTop;
+    constructor() {
     }
 }

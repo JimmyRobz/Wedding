@@ -8,11 +8,13 @@ import { PicturesComponent } from './pictures/pictures.component';
 import { StoryComponent } from './story/story.component';
 import { UsComponent } from './us/us.component';
 import { WeddingComponent } from './wedding/wedding.component';
+import { WitnessesComponent } from './witnesses/witnesses.component';
 
 const HOME_SECTIONS = [
     UsComponent,
     WeddingComponent,
     StoryComponent,
+    WitnessesComponent,
     EventsComponent,
     PicturesComponent,
     GuestbookComponent,
