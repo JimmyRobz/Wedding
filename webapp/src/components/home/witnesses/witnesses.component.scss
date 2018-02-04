@@ -33,6 +33,10 @@
             order: 2;
             text-align: left;
         }
+
+        .witness-last-name {
+            transform: translateX(-$tinySpace);
+        }
     }
 
     &:nth-child(odd) {
@@ -44,6 +48,10 @@
         .witness-name {
             order: 1;
             text-align: right;
+        }
+
+        .witness-last-name {
+            transform: translateX($tinySpace);
         }
     }
 }
@@ -71,7 +79,7 @@
     background-repeat: no-repeat;
 }
 
-.witness-name :first-child {
+.witness-first-name {
     font-size: 24px;
     font-weight: 400;
     margin: $tinySpace 0;
