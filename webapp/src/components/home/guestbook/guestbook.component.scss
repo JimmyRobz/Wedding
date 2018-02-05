@@ -16,12 +16,17 @@ input, textarea {
     user-select: text;
 
     outline: none;
-    border: 1px solid #9c9c9c;
+    border: 1px solid $borderColor;
 
     font-size: 14px;
 
     &:focus {
         border-color: $primaryColor;
+    }
+
+    &::placeholder {
+        color: #BBB;
+        font-weight: 300;
     }
 }
 

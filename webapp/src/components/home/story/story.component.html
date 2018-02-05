@@ -6,7 +6,7 @@
 
     <div *ngFor="let story of stories" class="story-row fullwidth">
 
-        <div class="story-picture">
+        <div class="story-picture" [style.background-image]="sanitize(story.picture)">
 
             <div class="story-date">
                 <p class="story-date-year cursive">{{story.year}}</p>

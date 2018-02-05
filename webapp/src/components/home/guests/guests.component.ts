@@ -9,7 +9,6 @@ export class GuestsComponent {
 
     static title = 'Invités';
     static fragment = 'guests';
-    static active = false;
 
     constructor(private el: ElementRef) {
     }

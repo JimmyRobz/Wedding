@@ -5,8 +5,8 @@
     position: relative;
     z-index: 10;
 
+    background: url("https://picsum.photos/1080/300") no-repeat center;
     background-size: cover;
-    background: url("/assets/images/us.background.jpg") no-repeat center;
 }
 
 #us-content {
@@ -24,25 +24,28 @@
     }
 
     > img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
         width: 72px;
 
+        position: static;
+        float: left;
+        transform: translate(40vw, -50%);
+
         @include min-width(580px) {
-            top: 40%;
+            position: absolute;
+            top: 120px;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     }
 
 }
 
 #us-card-jimmy .card-avatar {
-    //background-image: url("assets/jimmy.jpg");
+    background-image: url("https://picsum.photos/120/121");
 }
 
 #us-card-ophelie .card-avatar {
-    //background-image: url("assets/ophelie.jpg");
+    background-image: url("https://picsum.photos/120/122");
 }
 
 #us-background-overlay {
@@ -55,7 +58,7 @@
 }
 
 h2 {
-    margin: 44px 16px;
+    margin: 120px 16px;
     color: white;
     font-size: 44px;
     text-align: center;
@@ -105,5 +108,8 @@ h2 {
     height: 76px;
     border-radius: 38px;
     background-size: cover;
-    background: #9c9c9c center;
+    background: no-repeat center;
+
+    box-shadow: 0 0 0 4px white,
+    0 0 0 5px $borderColor;
 }

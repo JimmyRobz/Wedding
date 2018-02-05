@@ -87,6 +87,7 @@ body {
     background-color: $primaryColor;
     border-radius: 2px;
     -webkit-tap-highlight-color: transparent;
+    font-weight: 300;
 
     &:hover {
         background-color: darken($primaryColor, 5%);

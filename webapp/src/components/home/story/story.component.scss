@@ -25,6 +25,12 @@ $storyContentMargin: 96px;
             }
         }
 
+        .story-text {
+            @include min-width(980px) {
+                text-align: right;
+            }
+        }
+
         .story-title {
             @include min-width(980px) {
                 margin-right: $storyContentMargin;
@@ -64,14 +70,20 @@ $storyContentMargin: 96px;
     height: 80vw;
     max-width: 280px;
     max-height: 280px;
-    background-color: #888888;
+
     border-radius: 40vw;
     margin: auto;
+
+    background: no-repeat center;
+    background-size: cover;
 
     @include min-width(980px) {
         position: static;
         flex-grow: 1;
     }
+
+    box-shadow: 0 0 0 4px white,
+    0 0 0 5px $borderColor;
 }
 
 .story-date {
