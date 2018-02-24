@@ -1,0 +1,29 @@
+<div *ngIf="!loading && authenticated">
+    <div class="colored-background">
+        <ul id="guest-groups-summary" class="fullwidth">
+            <li class="guest-groups-summary-item flex">
+                <span class="guest-groups-summary-item-name flex-grow">Nombre d'invités</span>
+                <span class="guest-groups-summary-item-value">4</span>
+            </li>
+            <li class="guest-groups-summary-item flex">
+                <span class="guest-groups-summary-item-name flex-grow">Nombre d'invités</span>
+                <span class="guest-groups-summary-item-value">4</span>
+            </li>
+        </ul>
+    </div>
+    <ul class="card fullwidth">
+        <li *ngFor="let group of groups" class="guest-group-item flex">
+            <span class="guest-group-item-name flex-grow">{{group.name}}</span>
+            <span class="guest-group-item-count">{{group.size}}</span>
+        </li>
+    </ul>
+    <div id="guests-add-group-button" class="floating-action-button">
+        <img src="assets/images/plus.svg"/>
+    </div>
+</div>
+<div *ngIf="loading">
+    TODO Show loader
+</div>
+<div *ngIf="!loading && !authenticated">
+    TODO Show error
+</div>

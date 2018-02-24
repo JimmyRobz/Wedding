@@ -1,0 +1,39 @@
+@import "vars";
+
+p {
+    text-align: center;
+}
+
+form {
+    padding: $defaultSpace;
+}
+
+input {
+    display: block;
+    margin: $defaultSpace 0;
+    padding: $smallSpace;
+    width: 100%;
+    user-select: text;
+
+    outline: none;
+    border: 1px solid $borderColor;
+
+    font-size: 14px;
+
+    &:focus {
+        border-color: $primaryColor;
+    }
+
+    &::placeholder {
+        color: #BBB;
+        font-weight: 300;
+    }
+}
+
+input {
+    margin-top: $largeSpace;
+}
+
+.fullwidth {
+    max-width: 480px;
+}

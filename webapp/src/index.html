@@ -27,6 +27,27 @@
     <link rel="stylesheet" href="/assets/libs/justifiedjs/jquery.justified.css">
     <script src="/assets/libs/justifiedjs/jquery.justified.min.js"></script>
 
+    <!-- Disable Google analytics in dev -->
+    <script>
+        if (location.hostname !== 'mariage.robz.re') {
+            window['ga-disable-UA-114658470-1'] = true;
+        }
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114658470-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-114658470-1');
+    </script>
+
 </head>
 <body>
 

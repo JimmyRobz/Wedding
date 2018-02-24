@@ -1,0 +1,40 @@
+@import "vars";
+@import "mixins";
+
+.card {
+    margin: 16px;
+    width: auto;
+    @include shadow-center();
+}
+
+.guest-group-item-name {
+    font-size: 14px;
+}
+
+.guest-group-item-count {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.guest-group-item {
+    padding: $defaultSpace;
+    border-top: 1px solid #EFEFEF;
+
+    &:first-child {
+        border-top: none;
+    }
+}
+
+#guest-groups-summary {
+    padding: $defaultSpace;
+    color: white;
+}
+
+.guest-groups-summary-item {
+    margin-top: 8px;
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+

@@ -12,5 +12,6 @@ export const environment = {
         projectId: "wedding-dev-6bfa5",
         storageBucket: "wedding-dev-6bfa5.appspot.com",
         messagingSenderId: "1094156306206"
-    }
+    },
+    api: 'https://us-central1-wedding-dev-6bfa5.cloudfunctions.net/api/'
 };

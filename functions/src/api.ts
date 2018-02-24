@@ -17,30 +17,42 @@ app.use(cors());
 
 app.use(auth);
 
-app.get('/', root);
+app.get('/versions', versions);
 
 app.get('/guest/search/:query', searchGuest);
 
-app.post('/guest/request', isAuthenticated, requestGuest);
-
 app.get('/group/:groupId', getGroupById);
-
-app.post('/group/:groupId/request', isAuthenticated, isRegisteredInGroup, requestGuestForGroup);
 
 app.post('/group/:groupId/respond', isAuthenticated, isRegisteredInGroup, respondToGroup);
 
-app.post('/admin/request/list', isAuthenticated, isAdmin/* TODO , lisRequests */);
+app.post('/guestbook', createGuestbookMessage);
+
+app.get('/admin', isAuthenticated, isAdmin, success);
+
+app.get('/admin/summary', isAuthenticated, isAdmin, getSummary);
+
+app.get('/admin/group/:groupId', isAuthenticated, isAdmin, getGroupById);
+
+app.post('/admin/group', isAuthenticated, isAdmin, createGroup);
+
+app.post('/admin/group/:groupId/guests', isAuthenticated, isAdmin, createGuest);
+
+app.post('/admin/group/:groupId/respond', isAuthenticated, isAdmin, respondToGroup);
+
+app.delete('/admin/group/:groupId', isAuthenticated, isAdmin, deleteGroup);
+
+app.delete('/admin/group/:groupId/guest/:guestId', isAuthenticated, isAdmin, deleteGuest);
 
 app.use(errorHandler);
 
 // == Functions ==
 
 /**
- * Root route pribts node version and app version.
+ * Versions route prints node version and app version.
  * @param request
  * @param response
  */
-function root(request, response) {
+function versions(request, response) {
     response.send({
         node: process.version,
         version: require('./../package.json').version
@@ -70,21 +82,6 @@ async function searchGuest(request, response) {
 }
 
 /**
- * Requests a new guest with no group.
- * @param request
- * @param response
- */
-async function requestGuest(request, response) {
-    const {firstName, lastName, phoneNumber} = request.body;
-    if (request.user.phone_number !== phoneNumber) throw forbidden('Authenticated phone number does not match the one from the request');
-    if (!firstName || !lastName || !phoneNumber) throw badRequest('First name, last name and phone number are mandatory');
-    const ref = await admin.firestore().collection('requests').add({
-        firstName, lastName, phoneNumber
-    });
-    response.send({id: ref.id});
-}
-
-/**
  * Gets group by id.
  * @param request
  * @param response
@@ -95,21 +92,6 @@ async function getGroupById(request, response) {
     const snapshot = await admin.firestore().collection('groups').doc(groupId).get();
     const group = await deep(snapshot);
     response.send(group);
-}
-
-/**
- * Requests a new guest to the group.
- * @param request
- * @param response
- */
-async function requestGuestForGroup(request, response) {
-    const groupId = request.params.groupId;
-    const {firstName, lastName, phoneNumber} = request.body;
-    if (!firstName || !lastName) throw badRequest('First name and last name are mandatory');
-    const ref = await admin.firestore().collection('requests').add({
-        groupId, firstName, lastName, phoneNumber
-    });
-    response.send({id: ref.id});
 }
 
 /**
@@ -131,6 +113,125 @@ async function respondToGroup(request, response) {
     response.send({
         success: true
     });
+}
+
+/**
+ * Creates a guestbookmessage.
+ *
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
+async function createGuestbookMessage(request, response) {
+    const {name, message} = request.body;
+    const firestore = admin.firestore();
+    await firestore.collection('guestbook').add({
+        name, message, date: admin.firestore.FieldValue.serverTimestamp()
+    });
+    response.send({
+        success: true
+    });
+}
+
+/**
+ * Gets summary for admin view.
+ *
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
+async function getSummary(request, response) {
+    // Get complete groupcollection
+    const snapshot = await admin.firestore().collection('groups').get();
+    // Deeply fetch each group asynchronously
+    const groups = await Promise.all(_.map(snapshot.docs, async doc => {
+        const docSnapshot = await doc.ref.get();
+        const group = await deep(docSnapshot);
+        group.id = docSnapshot.id;
+        return group;
+    }));
+    // Flatten guests
+    const guests = _.chain(groups).map(group => group.guests).flatten().value();
+    // Respond
+    response.send({
+        guestCount: guests.length,
+        babyCount: _.filter(guests, guest => guest.age === 'baby').length,
+        kidCount: _.filter(guests, guest => guest.age === 'kid').length,
+        adultCount: _.filter(guests, guest => guest.age === 'adult').length,
+        femaleCount: _.filter(guests, guest => guest.sex === 'female').length,
+        maleCount: _.filter(guests, guest => guest.sex === 'male').length,
+        groups: _.map(groups, group => {
+            return {id: group.id, name: group.name, size: group.guests.length}
+        })
+    });
+}
+
+/**
+ * Creates a group.
+ *
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
+async function createGroup(request, response) {
+    const data = request.body;
+    const firestore = admin.firestore();
+    // Add group
+    const ref = await firestore.collection('groups').add({name: data.name});
+    // Add guests to group
+    if (data.guests.length > 0) {
+        const guests = ref.collection('guests');
+        await Promise.all(_.map(data.guests, async guest => {
+            await guests.add(guest);
+        }));
+    }
+    // Success
+    response.send({groupId: ref.id});
+}
+
+/**
+ * Creates a guest.
+ *
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
+async function createGuest(request, response) {
+    const data = request.body;
+    const groupId = request.params.groupId;
+    // Add guest
+    const ref = await admin.firestore().collection('groups').doc(groupId).collection('guests').add(data);
+    // Success
+    response.send({
+        guestId: ref.id
+    });
+}
+
+/**
+ * Deletes a group.
+ *
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
+async function deleteGroup(request, response) {
+    const groupId = request.params.groupId;
+    await admin.firestore().collection('groups').doc(groupId).delete();
+    response.send({success: true});
+}
+
+/**
+ * Deletes a guest.
+ *
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
+async function deleteGuest(request, response) {
+    const groupId = request.params.groupId;
+    const guestId = request.params.guestId;
+    await admin.firestore().collection('groups').doc(groupId).collection('guests').doc(guestId).delete();
+    response.send({success: true});
 }
 
 /**
@@ -281,4 +382,10 @@ function forbidden(message = 'Forbidden') {
  */
 function badRequest(message = 'Bad request') {
     return new HttpError(400, message);
+}
+
+function success(request, response) {
+    response.send({
+        success: true
+    });
 }
