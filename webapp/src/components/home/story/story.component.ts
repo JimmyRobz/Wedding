@@ -15,37 +15,51 @@ export class StoryComponent {
         {
             year: '2004',
             month: 'Sept',
-            title: 'Notre rencontre',
-            content: "On s'est rencontré en 2nde, à la rentrée 2004, au lycée de Bras-Panon dans la classe de M. Muller. On est rapidement passé de camarades de classe à amis, mais à ce moment là aucunde nous deux ne pensaient vraiment à ce qui allait se passer.",
-            picture: 'https://picsum.photos/280/282'
+            title: 'Première rencontre',
+            content: "On s'est rencontrés en 2nde au lycée de Bras-Panon. On est rapidement passés de camarades de classe à amis, mais à ce moment là aucun de nous deux ne pensait vraiment à ce qui allait se passer.",
+            picture: '/assets/images/events/rencontre.jpg'
         },
         {
-            year: '2004',
+            year: '2006',
             month: 'Sept',
-            title: 'Notre rencontre',
-            content: "On s'est rencontré en 2nde, à la rentrée 2004, au lycée de Bras-Panon dans la classe de M. Muller. On est rapidement passé de camarades de classe à amis, mais à ce moment là aucunde nous deux ne pensaient vraiment à ce qui allait se passer.",
-            picture: 'https://picsum.photos/280/282'
+            title: 'Début de l\'amourette',
+            content: "On commence notre petite histoire, alors que nos profs nous disent que ce n'est qu'une amourette. Alors M. Babef ? On dit quoi maintenant ?",
+            picture: '/assets/images/events/jeunes.jpg'
         },
         {
-            year: '2004',
-            month: 'Sept',
-            title: 'Notre rencontre',
-            content: "On s'est rencontré en 2nde, à la rentrée 2004, au lycée de Bras-Panon dans la classe de M. Muller. On est rapidement passé de camarades de classe à amis, mais à ce moment là aucunde nous deux ne pensaient vraiment à ce qui allait se passer.",
-            picture: 'https://picsum.photos/280/282'
+            year: '2007',
+            month: 'Août',
+            title: 'On vit ensemble',
+            content: "Début des études et de notre vie commune, dans notre grand appart à Angers.",
+            picture: '/assets/images/events/angers.jpg'
         },
         {
-            year: '2004',
-            month: 'Sept',
-            title: 'Notre rencontre',
-            content: "On s'est rencontré en 2nde, à la rentrée 2004, au lycée de Bras-Panon dans la classe de M. Muller. On est rapidement passé de camarades de classe à amis, mais à ce moment là aucunde nous deux ne pensaient vraiment à ce qui allait se passer.",
-            picture: 'https://picsum.photos/280/282'
+            year: '2012',
+            month: 'Oct',
+            title: 'On devient Toulousains',
+            content: "Après les études on décide de s'installer à Toulouse, la ville rose devient notre nouveau chez nous.",
+            picture: '/assets/images/events/toulouse.jpg'
         },
         {
-            year: '2004',
+            year: '2014',
+            month: 'Juin',
+            title: 'Just PACSed',
+            content: "On se PACS le 06 juin 2014 à Toulouse.",
+            picture: '/assets/images/events/pacs.jpg'
+        },
+        {
+            year: '2016',
+            month: 'Juil',
+            title: 'Naissance du petit nous',
+            content: "Notre petit couple devient une petite famille avec la naissance de notre petit ange Oan.",
+            picture: '/assets/images/events/oan.jpg'
+        },
+        {
+            year: '2016',
             month: 'Sept',
-            title: 'Notre rencontre',
-            content: "On s'est rencontré en 2nde, à la rentrée 2004, au lycée de Bras-Panon dans la classe de M. Muller. On est rapidement passé de camarades de classe à amis, mais à ce moment là aucunde nous deux ne pensaient vraiment à ce qui allait se passer.",
-            picture: 'https://picsum.photos/280/282'
+            title: 'Demande en mariage',
+            content: "Pour nos 10 ans, petit week-end en amoureux à Biarritz. Au bord de la plage, Jimmy se lance et demande Ophélie en mariage. Bizarrement elle a dit oui ! 😄",
+            picture: '/assets/images/events/biarritz.jpg'
         }
     ];
 

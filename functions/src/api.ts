@@ -25,23 +25,29 @@ app.get('/group/:groupId', getGroupById);
 
 app.post('/group/:groupId/respond', isAuthenticated, isRegisteredInGroup, respondToGroup);
 
+app.post('/group/:groupId/guest/:guestId', respondToGuest);
+
 app.post('/guestbook', createGuestbookMessage);
 
-app.get('/admin', isAuthenticated, isAdmin, success);
+app.get('/admin/summary', isAuthenticated, getSummary);
 
-app.get('/admin/summary', isAuthenticated, isAdmin, getSummary);
+app.get('/admin/groups', isAuthenticated, getGroups);
 
-app.get('/admin/group/:groupId', isAuthenticated, isAdmin, getGroupById);
+app.get('/admin/group/:groupId', isAuthenticated, getGroupById);
 
-app.post('/admin/group', isAuthenticated, isAdmin, createGroup);
+app.post('/admin/group', isAuthenticated, createGroup);
 
-app.post('/admin/group/:groupId/guests', isAuthenticated, isAdmin, createGuest);
+app.post('/admin/group/:groupId/guests', isAuthenticated, createGuest);
 
-app.post('/admin/group/:groupId/respond', isAuthenticated, isAdmin, respondToGroup);
+app.post('/admin/group/:groupId/respond', isAuthenticated, respondToGroup);
 
-app.delete('/admin/group/:groupId', isAuthenticated, isAdmin, deleteGroup);
+app.delete('/admin/group/:groupId', isAuthenticated, deleteGroup);
 
-app.delete('/admin/group/:groupId/guest/:guestId', isAuthenticated, isAdmin, deleteGuest);
+app.put('/admin/group/:groupId', isAuthenticated, updateGroup);
+
+app.put('/admin/group/:groupId/guest/:guestId', isAuthenticated, updateGuest);
+
+app.delete('/admin/group/:groupId/guest/:guestId', isAuthenticated, deleteGuest);
 
 app.use(errorHandler);
 
@@ -82,6 +88,22 @@ async function searchGuest(request, response) {
 }
 
 /**
+ * Gets groups.
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
+async function getGroups(request, response) {
+    const snapshot = await admin.firestore().collection('groups').get();
+    const groups = _.map(snapshot.docs, doc => {
+        const data = doc.data();
+        data.id = doc.id;
+        return data;
+    });
+    response.send(_.sortBy(groups, 'createdAt'));
+}
+
+/**
  * Gets group by id.
  * @param request
  * @param response
@@ -91,6 +113,10 @@ async function getGroupById(request, response) {
     const groupId = request.params.groupId;
     const snapshot = await admin.firestore().collection('groups').doc(groupId).get();
     const group = await deep(snapshot);
+
+    if (!group.guests) group.guests = [];
+    group.guests = _.sortBy(group.guests, 'createdAt');
+
     response.send(group);
 }
 
@@ -110,6 +136,27 @@ async function respondToGroup(request, response) {
         batch.update(guests.doc(guestId), {response: guestResponse})
     });
     await batch.commit();
+    response.send({
+        success: true
+    });
+}
+
+/**
+ * Updates response for a guest in a group.
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
+async function respondToGuest(request, response) {
+    const groupId = request.params.groupId;
+    const guestId = request.params.guestId;
+    const status = request.body.status;
+    const firestore = admin.firestore();
+    const guest = await firestore.collection('groups').doc(groupId).collection('guests').doc(guestId);
+    await guest.update({
+        status: status,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp()
+    });
     response.send({
         success: true
     });
@@ -148,6 +195,7 @@ async function getSummary(request, response) {
         const docSnapshot = await doc.ref.get();
         const group = await deep(docSnapshot);
         group.id = docSnapshot.id;
+        if (!group.guests) group.guests = [];
         return group;
     }));
     // Flatten guests
@@ -155,14 +203,17 @@ async function getSummary(request, response) {
     // Respond
     response.send({
         guestCount: guests.length,
+        groupCount: groups.length,
+        comingGuests: _.filter(guests, guest => guest.status === 'coming').length,
+        noAnswerGuests: _.filter(guests, guest => !guest.status).length,
         babyCount: _.filter(guests, guest => guest.age === 'baby').length,
+        comingBabies: _.filter(guests, guest => guest.age === 'baby' && guest.status == 'coming').length,
         kidCount: _.filter(guests, guest => guest.age === 'kid').length,
+        comingKids: _.filter(guests, guest => guest.age === 'kid' && guest.status == 'coming').length,
         adultCount: _.filter(guests, guest => guest.age === 'adult').length,
+        comingAdults: _.filter(guests, guest => guest.age === 'adult' && guest.status == 'coming').length,
         femaleCount: _.filter(guests, guest => guest.sex === 'female').length,
         maleCount: _.filter(guests, guest => guest.sex === 'male').length,
-        groups: _.map(groups, group => {
-            return {id: group.id, name: group.name, size: group.guests.length}
-        })
     });
 }
 
@@ -174,19 +225,15 @@ async function getSummary(request, response) {
  * @returns {Promise<void>}
  */
 async function createGroup(request, response) {
-    const data = request.body;
     const firestore = admin.firestore();
-    // Add group
-    const ref = await firestore.collection('groups').add({name: data.name});
-    // Add guests to group
-    if (data.guests.length > 0) {
-        const guests = ref.collection('guests');
-        await Promise.all(_.map(data.guests, async guest => {
-            await guests.add(guest);
-        }));
-    }
+    const data: any = {
+        name: 'Nouveau groupe',
+        createdAt: admin.firestore.FieldValue.serverTimestamp()
+    };
+    const ref = await firestore.collection('groups').add(data);
+    data.id = ref.id;
     // Success
-    response.send({groupId: ref.id});
+    response.send(data);
 }
 
 /**
@@ -197,13 +244,17 @@ async function createGroup(request, response) {
  * @returns {Promise<void>}
  */
 async function createGuest(request, response) {
-    const data = request.body;
     const groupId = request.params.groupId;
+
     // Add guest
-    const ref = await admin.firestore().collection('groups').doc(groupId).collection('guests').add(data);
+    const ref = await admin.firestore().collection('groups').doc(groupId).collection('guests').add({
+        createdAt: admin.firestore.FieldValue.serverTimestamp()
+    });
+
     // Success
     response.send({
-        guestId: ref.id
+        success: true,
+        id: ref.id
     });
 }
 
@@ -217,6 +268,43 @@ async function createGuest(request, response) {
 async function deleteGroup(request, response) {
     const groupId = request.params.groupId;
     await admin.firestore().collection('groups').doc(groupId).delete();
+    response.send({success: true});
+}
+
+/**
+ * Updates a group.
+ *
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
+async function updateGroup(request, response) {
+    const groupId = request.params.groupId;
+    const data = request.body;
+    data.updatedAt = admin.firestore.FieldValue.serverTimestamp();
+    await admin.firestore().collection('groups').doc(groupId).update(data);
+    response.send({success: true});
+}
+
+/**
+ * Updates a guest.
+ *
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
+async function updateGuest(request, response) {
+    const groupId = request.params.groupId;
+    const guestId = request.params.guestId;
+    const data = _.mapValues(request.body, value => {
+        if (value === null) {
+            return admin.firestore.FieldValue.delete();
+        } else {
+            return value;
+        }
+    });
+    data.updatedAt = admin.firestore.FieldValue.serverTimestamp();
+    await admin.firestore().collection('groups').doc(groupId).collection('guests').doc(guestId).update(data);
     response.send({success: true});
 }
 
@@ -280,7 +368,9 @@ async function deep(documentSnapshot) {
     await map(subcollections, async subcollection => {
         const querySnapshot = await subcollection.get();
         document[subcollection.id] = await map(querySnapshot.docs, async documentSnapshot => {
-            return await deep(documentSnapshot);
+            const subdocument = await deep(documentSnapshot);
+            subdocument.id = documentSnapshot.id;
+            return subdocument;
         });
     });
     return document;
@@ -312,20 +402,6 @@ async function auth(request, response, next) {
 function isAuthenticated(request, response, next) {
     if (!request.user) throw unauthorized();
     else next()
-}
-
-/**
- * Middleware that checks if the authenticated use is admin or not.
- * @param request
- * @param response
- * @param next
- * @returns {Promise<void>}
- */
-async function isAdmin(request, response, next) {
-    const snapshot = await admin.firestore().collection('app').doc('admin').get();
-    const isAdmin = _.includes(snapshot.data().uids, request.user.uid);
-    if (!isAdmin) throw forbidden();
-    else next();
 }
 
 /**

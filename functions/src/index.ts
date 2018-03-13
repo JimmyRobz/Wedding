@@ -2,6 +2,7 @@ import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
 import { app as api } from './api';
+import * as groups from './groups';
 import * as guests from './guests';
 
 // == Init ==
@@ -17,3 +18,7 @@ exports.api = functions.https.onRequest(api);
 exports.onGuestCreated = guests.onCreate;
 exports.onGuestUpdated = guests.onUpdate;
 exports.onGuestDeleted = guests.onDelete;
+
+// == Group document ==
+
+exports.onGroupDeleted = groups.onDelete;

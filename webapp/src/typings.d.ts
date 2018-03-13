@@ -6,3 +6,9 @@ interface NodeModule {
 }
 
 declare const $: any;
+
+interface ISnackbar {
+    show(value: object)
+}
+
+declare const Snackbar: ISnackbar;

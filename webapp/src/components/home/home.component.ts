@@ -121,6 +121,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     private scrollToActiveTab() {
-        this.navContainer.nativeElement.scrollLeft = this.activeTabElement.offsetLeft - this.navContainer.nativeElement.offsetWidth / 2 + this.activeTabElement.offsetWidth / 2;
+        if (this.navContainer && this.activeTabElement) {
+            this.navContainer.nativeElement.scrollLeft = this.activeTabElement.offsetLeft - this.navContainer.nativeElement.offsetWidth / 2 + this.activeTabElement.offsetWidth / 2;
+        }
     }
 }

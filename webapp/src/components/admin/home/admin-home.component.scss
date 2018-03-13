@@ -1,0 +1,24 @@
+@import "vars";
+
+h3 {
+    font-size: 24px;
+    color: white;
+    padding: 2 * $defaultSpace $defaultSpace $defaultSpace $defaultSpace;
+}
+
+li {
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.row {
+    display: block;
+    text-decoration: none;
+    color: $strongColor;
+    padding: $defaultSpace;
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: #FCFCFC;
+    }
+}

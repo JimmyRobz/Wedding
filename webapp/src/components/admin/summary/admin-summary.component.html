@@ -1,0 +1,43 @@
+<div id="loading" *ngIf="loading">Chargement en cours</div>
+
+<div *ngIf="!loading">
+    <div class="colored-background">
+        <h3 class="cursive fullwidth">Résumé des invités</h3>
+    </div>
+    <ul id="guest-groups-summary" class="fullwidth">
+        <li class="link-item">
+            <a routerLink="/admin/groups">
+                <span class="flex-grow">Groupes</span>
+                <span>{{summary.groupCount}}</span>
+            </a>
+        </li>
+        <li class="flex">
+            <span class="flex-grow">Invités</span>
+            <span>{{summary.comingGuests}} / {{summary.guestCount}}</span>
+        </li>
+        <li class="flex">
+            <span class="flex-grow">Non répondus</span>
+            <span>{{summary.noAnswerGuests}}</span>
+        </li>
+        <li class="flex">
+            <span class="flex-grow">Adultes</span>
+            <span>{{summary.comingAdults}} / {{summary.adultCount}}</span>
+        </li>
+        <li class="flex">
+            <span class="flex-grow">Enfants</span>
+            <span>{{summary.comingKids}} / {{summary.kidCount}}</span>
+        </li>
+        <li class="flex">
+            <span class="flex-grow">Bébés</span>
+            <span>{{summary.comingBabies}} / {{summary.babyCount}}</span>
+        </li>
+        <li class="flex">
+            <span class="flex-grow">Hommes</span>
+            <span>{{summary.maleCount}}</span>
+        </li>
+        <li class="flex">
+            <span class="flex-grow">Femmes</span>
+            <span>{{summary.femaleCount}}</span>
+        </li>
+    </ul>
+</div>

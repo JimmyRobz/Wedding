@@ -5,8 +5,16 @@
     position: relative;
     z-index: 10;
 
-    background: url("https://picsum.photos/1080/300") no-repeat center;
+    background: url("/assets/images/header.jpg") no-repeat;
     background-size: cover;
+
+    background-position-y: top;
+    background-position-x: -450px;
+
+    @include min-width(580px) {
+        background-position-y: center;
+        background-position-x: center;
+    }
 }
 
 #us-content {
@@ -41,11 +49,11 @@
 }
 
 #us-card-jimmy .card-avatar {
-    background-image: url("https://picsum.photos/120/121");
+    background-image: url("/assets/images/jimmy.jpg");
 }
 
 #us-card-ophelie .card-avatar {
-    background-image: url("https://picsum.photos/120/122");
+    background-image: url("/assets/images/ophelie.jpg");
 }
 
 #us-background-overlay {
@@ -107,8 +115,8 @@ h2 {
     width: 76px;
     height: 76px;
     border-radius: 38px;
-    background-size: cover;
     background: no-repeat center;
+    background-size: cover;
 
     box-shadow: 0 0 0 4px white,
     0 0 0 5px $borderColor;

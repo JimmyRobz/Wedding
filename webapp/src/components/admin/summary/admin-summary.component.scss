@@ -1,0 +1,41 @@
+@import "vars";
+@import "mixins";
+
+#loading, #unauthorized {
+    text-align: center;
+    margin: $largeSpace;
+}
+
+h3 {
+    color: white;
+    font-size: 24px;
+    padding: 2*$defaultSpace $defaultSpace $defaultSpace $defaultSpace;
+}
+
+li {
+    padding: $defaultSpace;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.link-item {
+    padding: 0;
+
+    a {
+        text-decoration: none;
+        -webkit-tap-highlight-color: transparent;
+        color: $textColor;
+
+        padding: $defaultSpace;
+        cursor: pointer;
+        display: flex;
+        width: 100%;
+
+        &:hover {
+            background-color: #FCFCFC;
+        }
+    }
+}
+
+#guest-groups-summary {
+    margin-bottom: 80px;
+}

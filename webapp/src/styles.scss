@@ -123,10 +123,10 @@ body {
 
     &:hover {
         cursor: pointer;
-        background-color: darken($primaryColor, 5%);;
+        background-color: darken($primaryColor, 5%);
     }
 
-    > img {
+    > svg {
         width: 24px;
         height: 24px;
         position: relative;
@@ -138,4 +138,10 @@ body {
 
 .colored-background {
     background-color: $primaryColor;
+}
+
+@media (min-width: 640px) {
+    .snackbar-container {
+        min-width: auto;
+    }
 }

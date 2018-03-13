@@ -1,29 +1,54 @@
-<div *ngIf="!loading && authenticated">
+<div *ngIf="group">
     <div class="colored-background">
-        <ul id="guest-groups-summary" class="fullwidth">
-            <li class="guest-groups-summary-item flex">
-                <span class="guest-groups-summary-item-name flex-grow">Nombre d'invités</span>
-                <span class="guest-groups-summary-item-value">4</span>
-            </li>
-            <li class="guest-groups-summary-item flex">
-                <span class="guest-groups-summary-item-name flex-grow">Nombre d'invités</span>
-                <span class="guest-groups-summary-item-value">4</span>
-            </li>
-        </ul>
+        <h3 class="fullwidth cursive">{{group.name}}</h3>
     </div>
-    <ul class="card fullwidth">
-        <li *ngFor="let group of groups" class="guest-group-item flex">
-            <span class="guest-group-item-name flex-grow">{{group.name}}</span>
-            <span class="guest-group-item-count">{{group.size}}</span>
+    <div id="group-name-row" class="fullwidth">
+        <input [(ngModel)]="group.name" placeholder="Nom du group"/>
+        <div id="group-name-save" (click)="onSaveGroupName()">
+            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                <path d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z"/>
+            </svg>
+        </div>
+    </div>
+    <ul class="fullwidth">
+        <li *ngFor="let guest of group.guests">
+            <div class="guest-row">
+                <input [(ngModel)]="guest.firstName" placeholder="Prénom"/>
+                <input [(ngModel)]="guest.lastName" placeholder="Nom"/>
+                <div class="guest-edit" (click)="onSave(guest)">
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z"/>
+                    </svg>
+                </div>
+                <div class="guest-delete" (click)="onDelete(guest)">
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22C17.53,22 22,17.53 22,12C22,6.47 17.53,2 12,2M14.59,8L12,10.59L9.41,8L8,9.41L10.59,12L8,14.59L9.41,16L12,13.41L14.59,16L16,14.59L13.41,12L16,9.41L14.59,8Z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="guest-row">
+                <div class="guest-choices">
+                    <div class="guest-choice" [class.active]="guest.age === 'baby'" (click)="setAge(guest, 'baby')">Bébé</div>
+                    <div class="guest-choice" [class.active]="guest.age === 'kid'" (click)="setAge(guest, 'kid')">Enfant</div>
+                    <div class="guest-choice" [class.active]="guest.age === 'adult'" (click)="setAge(guest, 'adult')">Adulte</div>
+                </div>
+                <div class="guest-choices">
+                    <div class="guest-choice" [class.active]="guest.sex === 'male'" (click)="setSex(guest, 'male')">Homme</div>
+                    <div class="guest-choice" [class.active]="guest.sex === 'female'" (click)="setSex(guest, 'female')">Femme</div>
+                </div>
+                <div class="guest-choices">
+                    <div class="guest-choice" [class.active]="!guest.status" (click)="setStatus(guest, null)">Pas de réponse</div>
+                    <div class="guest-choice" [class.active]="guest.status === 'not coming'" (click)="setStatus(guest, 'not coming')">Ne vient pas</div>
+                    <div class="guest-choice" [class.active]="guest.status === 'coming'" (click)="setStatus(guest, 'coming')">Vient</div>
+                </div>
+            </div>
         </li>
     </ul>
-    <div id="guests-add-group-button" class="floating-action-button">
-        <img src="assets/images/plus.svg"/>
-    </div>
 </div>
-<div *ngIf="loading">
-    TODO Show loader
-</div>
-<div *ngIf="!loading && !authenticated">
-    TODO Show error
+<p *ngIf="group === undefined">Chargement en cours</p>
+<p *ngIf="group === null">Erreur dans le chargement du groupe</p>
+<div class="floating-action-button" (click)="addGuest()">
+    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="#ffffff" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"/>
+    </svg>
 </div>

@@ -1,16 +1,15 @@
-<div *ngIf="!authenticated">
+<div *ngIf="!(authenticated | async)">
     <form #form="ngForm" (ngSubmit)="onConnect(form)" class="fullwidth">
         <input placeholder="Identifiant" name="login" ngModel required/>
-        <input placeholder="Mot de passe" name="password" ngModel required>
+        <input placeholder="Mot de passe" name="password" ngModel required type="password">
         <p>
             <button #submitButton class="button" type="submit" [disabled]="submitting">{{submitButtonText}}</button>
         </p>
     </form>
 </div>
-<div *ngIf="!authenticated">
-    <form #disconnectForm="ngForm" (ngSubmit)="onDisconnect(disconnectForm)" class="fullwidth">
-        <p>
-            <button #submitButton class="button" type="submit" [disabled]="submitting">{{submitButtonText}}</button>
-        </p>
-    </form>
+<div *ngIf="authenticated | async" class="fullwidth" id="logout-box">
+    <p>Utilisateur authentifié.</p>
+    <p>
+        <button #submitButton class="button" (click)="onDisconnect()">Déconnexion</button>
+    </p>
 </div>

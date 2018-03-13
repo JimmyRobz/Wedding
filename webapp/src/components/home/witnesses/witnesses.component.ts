@@ -5,22 +5,22 @@ const WITNESSES = [
     {
         firstName: 'Gabrielle',
         lastName: 'Marques',
-        picture: 'https://picsum.photos/180/181'
+        picture: '/assets/images/witnesses/gab.jpg'
     },
     {
         firstName: 'Chloé',
         lastName: 'Marion',
-        picture: 'https://picsum.photos/180/182'
+        picture: '/assets/images/witnesses/chloe.jpg'
     },
     {
         firstName: 'Jean',
         lastName: 'Dat',
-        picture: 'https://picsum.photos/180/183'
+        picture: '/assets/images/witnesses/jean.jpg'
     },
     {
         firstName: 'Ghyslain',
         lastName: 'Bruno',
-        picture: 'https://picsum.photos/180/184'
+        picture: '/assets/images/witnesses/ghys.jpg'
     }
 ];
 

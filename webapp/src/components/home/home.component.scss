@@ -113,7 +113,7 @@ nav a {
 }
 
 #thanks {
-    background-image: url("https://picsum.photos/1080/240");
+    background-image: url("/assets/images/thanks.jpg");
     background-size: cover;
     background-position: center;
 
@@ -126,4 +126,19 @@ nav a {
     font-weight: 400;
     font-size: 44px;
     text-align: center;
+}
+
+#footer {
+    text-align: center;
+
+    svg {
+        transform: translateY(4px);
+    }
+}
+
+#admin {
+    display: block;
+    color: $textColor;
+    -webkit-tap-highlight-color: transparent;
+    margin-top: 3 * $largeSpace;
 }

@@ -1,0 +1,47 @@
+@import "vars";
+
+#loading {
+    padding: $largeSpace;
+    text-align: center;
+}
+
+h3 {
+    font-size: 24px;
+    color: white;
+    padding: 2 * $defaultSpace $defaultSpace $defaultSpace $defaultSpace;
+}
+
+li {
+    border-bottom: 1px solid #E5E5E5;
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: #FCFCFC;
+    }
+}
+
+li a {
+    flex: 1;
+    text-decoration: none;
+    color: $strongColor;
+    padding: $defaultSpace;
+}
+
+.group-delete {
+    margin: 0 $tinySpace;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    svg {
+        fill: $strongColor;
+    }
+
+    &:hover {
+        svg {
+            fill: $primaryColor;
+        }
+    }
+}

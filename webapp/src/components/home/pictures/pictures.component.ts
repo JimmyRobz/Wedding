@@ -1,13 +1,93 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-const IMAGES = [[800, 600], [600, 800], [1024, 768], [768, 1024], [1920, 1080], [1080, 1920], [1440, 980], [980, 1440], [800, 620], [620, 800], [1440, 920], [920, 1440]].map(size => {
-    return {
-        url: `https://picsum.photos/${size[0]}/${size[1]}`,
-        width: size[0],
-        height: size[1]
+const IMAGES = [
+    {
+        url: `/assets/images/gallery/01.jpg`,
+        width: 600,
+        height: 607
+    },
+    {
+        url: `/assets/images/gallery/02.jpg`,
+        width: 600,
+        height: 431
+    },
+    {
+        url: `/assets/images/gallery/03.jpg`,
+        width: 600,
+        height: 791
+    },
+    {
+        url: `/assets/images/gallery/04.jpg`,
+        width: 600,
+        height: 979
+    },
+    {
+        url: `/assets/images/gallery/05.jpg`,
+        width: 600,
+        height: 930
+    },
+    {
+        url: `/assets/images/gallery/06.jpg`,
+        width: 600,
+        height: 253
+    },
+    {
+        url: `/assets/images/gallery/07.jpg`,
+        width: 600,
+        height: 361
+    },
+    {
+        url: `/assets/images/gallery/08.jpg`,
+        width: 600,
+        height: 614
+    },
+    {
+        url: `/assets/images/gallery/09.jpg`,
+        width: 600,
+        height: 631
+    },
+    {
+        url: `/assets/images/gallery/10.jpg`,
+        width: 600,
+        height: 381
+    },
+    {
+        url: `/assets/images/gallery/11.jpg`,
+        width: 600,
+        height: 800
+    },
+    {
+        url: `/assets/images/gallery/12.jpg`,
+        width: 600,
+        height: 340
+    },
+    {
+        url: `/assets/images/gallery/13.jpg`,
+        width: 600,
+        height: 636
+    },
+    {
+        url: `/assets/images/gallery/14.jpg`,
+        width: 600,
+        height: 313
+    },
+    {
+        url: `/assets/images/gallery/15.jpg`,
+        width: 600,
+        height: 450
+    },
+    {
+        url: `/assets/images/gallery/16.jpg`,
+        width: 600,
+        height: 431
+    },
+    {
+        url: `/assets/images/gallery/17.jpg`,
+        width: 600,
+        height: 528
     }
-});
+];
 
 @Component({
     selector: 'pictures',

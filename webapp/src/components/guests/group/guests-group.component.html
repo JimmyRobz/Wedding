@@ -1,0 +1,19 @@
+<div *ngIf="group">
+    <div class="colored-background">
+        <h3 class="fullwidth cursive">{{group.name}}</h3>
+    </div>
+    <div class="help">
+        <p class="fullwidth">Répondez à l'invitation pour chancun des invités de votre groupe</p>
+    </div>
+    <ul class="fullwidth">
+        <li *ngFor="let guest of group.guests">
+            <div class="guest-name">{{guest.firstName}} {{guest.lastName}}</div>
+            <div class="guest-choices">
+                <div class="guest-choice" [class.active]="guest.status === 'not coming'" (click)="setStatus(guest, 'not coming')">Non&nbsp;&nbsp;☹️</div>
+                <div class="guest-choice" [class.active]="guest.status === 'coming'" (click)="setStatus(guest, 'coming')">Oui&nbsp;&nbsp;😀️</div>
+            </div>
+        </li>
+    </ul>
+</div>
+<p *ngIf="group === undefined">Chargement en cours</p>
+<p *ngIf="group === null">Erreur dans le chargement du groupe</p>

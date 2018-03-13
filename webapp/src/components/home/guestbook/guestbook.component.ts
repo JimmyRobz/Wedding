@@ -32,20 +32,20 @@ export class GuestbookComponent {
                 .toPromise()
                 .then(() => {
                     form.resetForm();
-                    alert("Message envoyé. Merci 😃");
+                    Snackbar.show({text: "Message envoyé. Merci 😃", showAction: false, duration: 1500});
 
                     this.submitting = false;
                     this.submitButtonText = 'Envoyer';
                 })
                 .catch(error => {
                     console.error(error);
-                    alert("Envoi du message impossible ☹️");
+                    Snackbar.show({text: "Envoi du message impossible ☹️", showAction: false, duration: 1500});
 
                     this.submitting = false;
                     this.submitButtonText = 'Envoyer';
                 });
         } else {
-            alert("⚠️ Entrez votre nom ET votre message");
+            Snackbar.show({text: "⚠️ Entrez votre nom ET votre message", showAction: false, duration: 1500});
         }
     }
 

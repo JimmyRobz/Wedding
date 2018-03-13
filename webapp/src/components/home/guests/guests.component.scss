@@ -6,11 +6,12 @@ p {
 }
 
 .button {
+    color: white;
+    text-decoration: none;
     margin: $largeSpace $defaultSpace;
 }
 
 a {
     text-decoration: underline;
-    font-weight: 400;
     color: $primaryColor;
 }

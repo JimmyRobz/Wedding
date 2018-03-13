@@ -7,10 +7,15 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { ScrollToModule } from 'ng2-scroll-to-el';
+import { AdminGroupsComponent } from '../components/admin/groups/admin-groups.component';
 import { AdminGuestsComponent } from '../components/admin/guests/admin-guests.component';
+import { AdminHomeComponent } from '../components/admin/home/admin-home.component';
 import { AdminLoginComponent } from '../components/admin/login/admin-login.component';
+import { AdminSummaryComponent } from '../components/admin/summary/admin-summary.component';
 
 import { AppComponent } from '../components/app/app.component';
+import { GuestsGroupComponent } from '../components/guests/group/guests-group.component';
+import { GuestsSearchComponent } from '../components/guests/search/guests-search.component';
 import { HeaderComponent } from '../components/header/header.component';
 import { EventsComponent } from '../components/home/events/events.component';
 import { GuestbookComponent } from '../components/home/guestbook/guestbook.component';
@@ -23,6 +28,7 @@ import { WeddingComponent } from '../components/home/wedding/wedding.component';
 import { WitnessesComponent } from '../components/home/witnesses/witnesses.component';
 import { NotFoundComponent } from '../components/notfound/notfound.component';
 import { environment } from '../environments/environment';
+import { AdminService } from '../services/admin.service';
 
 const routes: Routes = [
     // Home
@@ -38,21 +44,44 @@ const routes: Routes = [
     // Guests
     {
         path: 'guests',
-        redirectTo: '/guests/rsvp',
+        redirectTo: '/guests/search',
         pathMatch: 'full'
     },
     {
-        path: 'guests',
-        component: GuestsComponent
+        path: 'guests/search',
+        component: GuestsSearchComponent
     },
+    {
+        path: 'guests/group/:groupId',
+        component: GuestsGroupComponent
+    },
+    // Admin
     {
         path: 'admin',
-        redirectTo: '/admin/guests',
-        pathMatch: 'full'
-    },
-    {
-        path: 'admin/guests',
-        component: AdminGuestsComponent
+        canActivateChild: [AdminService],
+        children: [
+            {
+                path: '',
+                redirectTo: 'home',
+                pathMatch: 'full'
+            },
+            {
+                path: 'home',
+                component: AdminHomeComponent
+            },
+            {
+                path: 'summary',
+                component: AdminSummaryComponent
+            },
+            {
+                path: 'groups',
+                component: AdminGroupsComponent
+            },
+            {
+                path: 'group/:groupId',
+                component: AdminGuestsComponent
+            }
+        ]
     },
     {
         path: 'admin/login',
@@ -78,9 +107,14 @@ const routes: Routes = [
         PicturesComponent,
         GuestbookComponent,
         GuestsComponent,
+        GuestsSearchComponent,
+        AdminHomeComponent,
+        AdminGroupsComponent,
         AdminGuestsComponent,
+        AdminSummaryComponent,
         AdminLoginComponent,
         GuestsComponent,
+        GuestsGroupComponent,
         NotFoundComponent
     ],
     imports: [
@@ -93,7 +127,9 @@ const routes: Routes = [
         AngularFireAuthModule,
         HttpClientModule
     ],
-    providers: [],
+    providers: [
+        AdminService
+    ],
     bootstrap: [
         AppComponent
     ]

@@ -1,0 +1,61 @@
+@import "vars";
+
+input {
+    flex: 1;
+    width: 100%;
+    padding: $defaultSpace;
+    user-select: text;
+
+    outline: none;
+    border: none;
+
+    font-size: 14px;
+
+    &::placeholder {
+        color: #BBB;
+        font-weight: 300;
+    }
+}
+
+h3 {
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    padding: $largeSpace;
+}
+
+li {
+    border-bottom: 1px solid #E5E5E5;
+
+    a {
+        display: block;
+        padding: $defaultSpace;
+        cursor: pointer;
+
+        color: $strongColor;
+        text-decoration: none;
+
+        &:hover {
+            background-color: #FCFCFC;
+        }
+
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
+p {
+    text-align: center;
+    padding: $largeSpace;
+}
+
+#search-box {
+    background: white;
+    display: flex;
+    align-items: center;
+    padding: $tinySpace $defaultSpace;
+}
+
+#search-row {
+    border-bottom: 1px solid #E5E5E5;
+}
+

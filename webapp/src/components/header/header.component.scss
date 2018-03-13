@@ -24,10 +24,15 @@
     }
 }
 
-h1 {
+#header-title {
     color: $strongColor;
     font-size: 20px;
     margin: 0 $defaultSpace;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
 
     @include min-width(480px) {
         font-size: 24px;
