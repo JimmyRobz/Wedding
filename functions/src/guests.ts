@@ -1,4 +1,5 @@
 import * as functions from 'firebase-functions';
+import * as nodemailer from 'nodemailer';
 
 import { usingGuests } from './algolia';
 
@@ -24,6 +25,8 @@ export async function _onUpdate(event) {
     await usingGuests(async index => {
         await index.saveObject(guest);
     });
+
+    sendEmailIfNecessary(event);
 }
 
 export async function _onDelete(event) {
@@ -43,4 +46,34 @@ function buildGuest(event) {
         lastName: data.lastName,
         groupId: groupId
     };
+}
+
+function sendEmailIfNecessary(event) {
+    const current = event.data.data();
+    const previous = event.data.previous.data();
+    if (current.status !== previous.status) {
+        const {address, pass} = functions.config().mailer;
+
+        const smtpTransport = nodemailer.createTransport({
+            service: "Gmail",
+            auth: {
+                user: address,
+                pass: pass
+            }
+        });
+
+        const message = current.firstName + ' ' + current.lastName + ' ' + (current.status === 'coming' ? 'sera là' : 'ne sera pas là')
+
+        const mailOptions = {
+            from: '"Invités Mariage" <wedding.robz.re@gmail.com>',
+            to: 'jimmy@robz.re, laup.ophelie@gmail.com',
+            subject: message,
+            text: message
+        };
+
+        smtpTransport.sendMail(mailOptions, function (error, response) {
+            if (error) console.error(error);
+            else console.log('Email envoyé');
+        });
+    }
 }

@@ -84,7 +84,10 @@ async function searchGuest(request, response) {
             groupId: hit.groupId,
         };
     });
-    response.send(guests);
+    const filteredGuests = _.filter(guests, guest => {
+        return guest.firstName && guest.lastName;
+    });
+    response.send(filteredGuests);
 }
 
 /**
